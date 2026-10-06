@@ -1,6 +1,6 @@
 # Contributing to project-next
 
-Purpose: how the three of us (Marcus, Alex, Nehi) work together in this repo. Read it once, come back when unsure.
+Purpose: how the three of us (Marcus, Alex, Naayi) work together in this repo. Read it once, come back when unsure.
 
 ## Why we document
 

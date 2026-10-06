@@ -12,7 +12,7 @@
 |---|---|
 | Marcus | Initiated and presented the idea. Owner of this repo. |
 | Alex | Took part in the discussion. |
-| Nehi | Took part in the discussion. |
+| Naayi | Took part in the discussion. |
 
 ## The idea in one paragraph
 
@@ -67,7 +67,7 @@ All three have other commitments and limited time. Alex already has a general se
 
 ## Decisions
 
-- Alex and Marcus agreed to continue on this together. Nehi is involved.
+- Alex and Marcus agreed to continue on this together. Naayi is involved.
 - Cash is the default; online payment is never forced.
 - Niche first (barbers and hairdressers), Germany first.
 - A follow-up meeting was agreed (see next steps).

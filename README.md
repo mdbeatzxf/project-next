@@ -4,7 +4,7 @@ Working title. **Booking & walk-in queue platform for barbers and hairdressers.*
 
 **Status:** Phase 0: concept & planning
 
-A side project by Marcus, Alex and Nehi. Providers (barbershops, salons, independent and mobile stylists) list their services, prices and portfolio. Clients find them by city and specialty, book a slot or join the walk-in queue from their phone, and see how many people are ahead of them. No phone numbers exchanged. Cash stays the default. The Platform (us) handles verification and admin.
+A side project by Marcus, Alex and Naayi. Providers (barbershops, salons, independent and mobile stylists) list their services, prices and portfolio. Clients find them by city and specialty, book a slot or join the walk-in queue from their phone, and see how many people are ahead of them. No phone numbers exchanged. Cash stays the default. The Platform (us) handles verification and admin.
 
 ## Start here
 
@@ -21,7 +21,7 @@ Full index: [docs/README.md](docs/README.md).
 
 ## Team
 
-Marcus, Alex, Nehi.
+Marcus, Alex, Naayi.
 
 ## Language
 
