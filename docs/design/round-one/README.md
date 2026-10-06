@@ -8,7 +8,7 @@ Purpose: the first UI design round, exported 1:1 from Claude Design. Do not edit
 
 ## How to open
 
-Open `00 Cover and Direction.dc.html` in a browser. The pages link to each other. They load React and Babel from unpkg.com at runtime, so you need internet access. Via GitHub Pages the folder is served as `docs/design/round-one/`.
+Open `00 Cover and Direction.dc.html` in a browser. The pages link to each other. They load React and Babel from unpkg.com at runtime, so you need internet access. Via GitHub Pages: https://mdbeatzxf.github.io/project-next/design/round-one/00%20Cover%20and%20Direction.dc.html
 
 | Page | What |
 |---|---|
