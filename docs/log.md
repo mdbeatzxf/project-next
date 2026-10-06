@@ -50,3 +50,12 @@ Copy the template, fill it in, append it at the bottom. Keep it short: what chan
 **Open points / next**
 - Team confirms or overturns the design decisions (to-do in Phase 0).
 - Next design round only via a new Claude Design run from `claude-design-prompt.md`; never edit the export by hand.
+
+## 2026-10-06 – Marcus – AI session
+
+**What changed**
+- GitHub Pages enabled by Marcus (branch `main`, folder `/`). Site: https://mdbeatzxf.github.io/project-next/
+- Removed the Actions-based Pages workflow again; the branch deployment makes it redundant. Links in README, docs index, CONTRIBUTING and the design README point to the live URLs.
+
+**Open points / next**
+- Team review of the docs and the design decisions before the next meeting.
