@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>project-next App Sketch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: one-column working document (max 1120px) with a sticky section nav.
+   Palette: steel neutrals with a slight blue bias, a warm wood tint for the hero panel, one cobalt accent.
+   Type: Bricolage Grotesque for headings, IBM Plex Sans for body, system mono for fields. */
+:root{
+  --bg:#eef1f4;
+  --surface:#ffffff;
+  --fg:#182028;
+  --muted:#5b6675;
+  --line:#cfd6de;
+  --accent:#2050b3;
+  --accent-ink:#ffffff;
+  --wood:#8a5a2b;
+  --good:#1f7a3f;
+  --warn:#b45309;
+  --head:"Bricolage Grotesque","Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --gutter:clamp(16px,4vw,40px);
+  --radius:10px;
+  --wire:color-mix(in srgb,var(--fg) 8%,var(--surface));
+  --wire-2:color-mix(in srgb,var(--fg) 16%,var(--surface));
+  --tint:color-mix(in srgb,var(--accent) 10%,var(--surface));
+  --wood-tint:color-mix(in srgb,var(--wood) 9%,var(--surface));
+  --good-tint:color-mix(in srgb,var(--good) 10%,var(--surface));
+  --warn-tint:color-mix(in srgb,var(--warn) 9%,var(--surface));
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12171d; --surface:#1a2027; --fg:#e4e9ee; --muted:#9aa5b1; --line:#2d3640;
+    --accent:#8fb1f5; --accent-ink:#0d1a33; --wood:#d1a070; --good:#5fc380; --warn:#e9a84a;
+    color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12171d; --surface:#1a2027; --fg:#e4e9ee; --muted:#9aa5b1; --line:#2d3640;
+  --accent:#8fb1f5; --accent-ink:#0d1a33; --wood:#d1a070; --good:#5fc380; --warn:#e9a84a;
+  color-scheme:dark
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);margin:0;font-family:var(--body);font-size:16px;line-height:1.55}
+*,*::before,*::after{box-sizing:border-box}
+img,svg{max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--head);text-wrap:balance;line-height:1.15;margin:0;font-weight:700}
+h1{font-size:clamp(30px,5vw,44px);letter-spacing:-.01em}
+h2{font-size:clamp(22px,3vw,28px);font-weight:650}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+ul,ol{margin:0}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:var(--gutter);padding-block:20px 48px}
+
+/* ---------- top ---------- */
+.top{display:flex;flex-direction:column;gap:10px;padding-block:8px 20px;max-width:72ch}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--wood)}
+.pitch{font-size:clamp(17px,2.2vw,20px);color:var(--fg);font-weight:500}
+.meta{font-size:14px;color:var(--muted)}
+
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;align-items:center;gap:4px;overflow-x:auto;
+  margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);padding-block:8px;
+  background:var(--bg);border-bottom:1px solid var(--line);border-top:1px solid var(--line);scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;padding:6px 11px;border-radius:999px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;flex:none}
+.nav a:hover{color:var(--fg)}
+.nav a.active{background:var(--surface);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line)}
+.nav button{margin-left:auto;flex:none;font:inherit;font-size:12.5px;font-weight:500;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+.nav button:hover{color:var(--fg)}
+
+/* ---------- sections ---------- */
+.section{padding-block:40px 8px;border-top:1px solid var(--line);margin-top:28px;scroll-margin-top:66px}
+.section:first-of-type{border-top:0;margin-top:0;padding-top:28px}
+.sec-head{display:flex;flex-direction:column;gap:6px;margin-bottom:22px;max-width:72ch}
+.sec-head .lead{color:var(--muted);font-size:15px}
+.sub{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:28px 0 12px}
+
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);line-height:1.5;white-space:nowrap;vertical-align:middle}
+.chip.mvp{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,var(--surface));background:var(--good-tint)}
+.chip.later{color:var(--warn);border-style:dashed;border-color:color-mix(in srgb,var(--warn) 60%,var(--surface));background:var(--warn-tint)}
+.chip.prop{color:var(--wood);border-color:color-mix(in srgb,var(--wood) 50%,var(--surface));background:var(--wood-tint)}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:14.5px;font-weight:500;text-decoration:none;cursor:pointer;min-width:0}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{border-color:var(--accent);filter:brightness(1.07)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+.table-wrap{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.tbl th,.tbl td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl .dim{color:var(--muted)}
+
+/* ---------- 1 problem / solution ---------- */
+.pairs{border-top:1px solid var(--line)}
+.pair{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.pair>div{padding:14px 0;min-width:0;font-size:15px}
+.pair .prob{padding-right:20px}
+.pair .sol{padding-left:20px;border-left:1px solid var(--line)}
+.pair .lab{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px}
+.pair .sol .lab{color:var(--accent)}
+@media (max-width:700px){
+  .pair{grid-template-columns:1fr}
+  .pair .prob{padding-right:0;padding-bottom:8px}
+  .pair .sol{padding-left:0;border-left:0;padding-top:4px}
+}
+
+/* ---------- 2 who is who ---------- */
+.parties{display:grid;grid-template-columns:1fr auto 1.5fr auto 1fr;gap:12px;align-items:center}
+.party{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.party .who{font-size:13.5px;color:var(--muted)}
+.party.provider{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
+.stylists{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.stylists .k{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stylist{border:1px dashed var(--line);border-radius:6px;padding:3px 8px;font-size:12.5px;color:var(--muted);background:var(--bg)}
+.rel{display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:var(--muted);text-align:center;min-width:0;padding-inline:4px}
+.rel .fwd::after{content:" \2192";color:var(--fg)}
+.rel .back::before{content:"\2190  ";color:var(--fg)}
+.mapping{margin-top:18px;padding:12px 16px;border-left:3px solid var(--wood);background:var(--wood-tint);border-radius:0 8px 8px 0;font-weight:500}
+@media (max-width:760px){
+  .parties{grid-template-columns:1fr}
+  .rel{flex-direction:row;justify-content:center;gap:18px;flex-wrap:wrap;padding-block:4px}
+  .rel .fwd::after{content:" \2193"}
+  .rel .back::before{content:"\2191 "}
+}
+
+/* ---------- 3 flows ---------- */
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);gap:2px}
+.toggle button{font:inherit;font-weight:500;font-size:14px;border:0;background:none;color:var(--muted);padding:6px 16px;border-radius:999px;cursor:pointer}
+.toggle button:hover{color:var(--fg)}
+.toggle button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.flow-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.flow-head .who{font-size:13.5px;color:var(--muted)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+.seg{display:flex;align-items:center;gap:10px;min-width:0}
+.step{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;min-width:0;max-width:200px;font-weight:500;font-size:14px;line-height:1.3}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+.step.hi{border-color:var(--accent);background:var(--tint)}
+.step.daily{border-color:var(--wood);background:var(--wood-tint)}
+.arrow{position:relative;width:22px;height:2px;background:var(--line);flex:none}
+.arrow::after{content:"";position:absolute;right:-1px;top:-5px;width:9px;height:12px;background:var(--muted);clip-path:polygon(0 0,100% 50%,0 100%)}
+.fork{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--muted);border-radius:10px;padding:6px;align-items:stretch;min-width:0}
+.fork em{font-style:normal;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:center}
+.fork .step{max-width:none}
+@media (max-width:640px){
+  .chain,.seg{flex-direction:column;align-items:stretch}
+  .step{max-width:none}
+  .chain .arrow{width:2px;height:22px;margin-inline:auto}
+  .chain .arrow::after{top:auto;bottom:-1px;left:-5px;width:12px;height:9px;clip-path:polygon(0 0,100% 0,50% 100%)}
+}
+
+.hero-q{border:1px solid color-mix(in srgb,var(--wood) 45%,var(--surface));background:var(--wood-tint);border-radius:14px;padding:clamp(16px,3vw,28px);margin-top:32px}
+.hero-q .kicker{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--wood)}
+.hero-q h3{font-size:clamp(19px,2.4vw,24px);margin-top:4px}
+.hero-q .lead{color:var(--muted);margin-top:6px;max-width:70ch;font-size:15px}
+.lanes{overflow-x:auto;margin-top:16px;padding-bottom:4px}
+.lanes svg{display:block;width:100%;min-width:720px;max-width:960px;height:auto}
+.ln-band{fill:var(--surface);stroke:var(--line);stroke-width:1}
+.ln-band.prov{fill:var(--bg)}
+.ln-lab{fill:var(--muted);font:600 10px var(--body);letter-spacing:.08em}
+.q-box{fill:var(--surface);stroke:var(--line);stroke-width:1}
+.q-box.hi{fill:var(--accent);stroke:var(--accent)}
+.q-t{fill:var(--fg);font:500 11.5px var(--body)}
+.q-s{fill:var(--muted);font:400 10px var(--body)}
+.q-ink{fill:var(--accent-ink);font:500 11.5px var(--body)}
+.q-ink-s{fill:var(--accent-ink);font:400 10px var(--body);opacity:.85}
+.q-arr{fill:none;stroke:var(--muted);stroke-width:1.5}
+.q-al{fill:var(--muted);font:400 10px var(--body)}
+.q-mk{fill:var(--muted)}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.states{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px;font-size:13px;color:var(--muted)}
+.states .k{font-family:var(--mono);font-size:12px;margin-right:4px}
+.pill{font-family:var(--mono);font-size:12.5px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.pill.waiting{color:var(--muted)}
+.pill.called{border-color:var(--warn);color:var(--warn);background:var(--warn-tint)}
+.pill.serving{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.pill.done{border-color:var(--good);color:var(--good);background:var(--good-tint)}
+.pill.left{border-style:dashed;color:var(--muted)}
+.states .arrow{width:16px}
+
+/* ---------- 4 screens ---------- */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.screen{min-width:0;display:flex;flex-direction:column;gap:10px}
+.screen-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.screen-head h3{font-size:15px}
+.screen-head p{font-size:12.5px;color:var(--muted);flex-basis:100%}
+.phone{border:2px solid var(--line);border-radius:24px;background:var(--surface);padding:10px;width:100%;max-width:290px;margin-inline:auto;display:flex;flex-direction:column;gap:8px;font-size:11.5px;line-height:1.35;color:var(--fg);min-height:540px}
+.pbar{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;padding:2px 6px;font-variant-numeric:tabular-nums}
+.wf{background:var(--wire);border-radius:5px;padding:5px 7px;color:var(--muted);min-width:0}
+.wf.input{border:1px solid var(--line);background:var(--surface);display:flex;justify-content:space-between;gap:6px}
+.wf.input b{color:var(--fg);font-weight:500}
+.wf.img{background:repeating-linear-gradient(135deg,var(--wire) 0 6px,var(--wire-2) 6px 7px);aspect-ratio:1;border-radius:4px;padding:0}
+.wf.img.wide{aspect-ratio:2.4/1}
+.wf.btn{text-align:center;font-weight:600;color:var(--fg);background:var(--wire-2);border-radius:7px;padding:7px}
+.wf.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.wf.btn.ghost{background:var(--surface);border:1px solid var(--line)}
+.wf.btn.quiet{background:var(--surface);border:1px dashed var(--line);color:var(--muted);font-weight:500}
+.wf.title{background:none;padding:0;color:var(--fg);font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.wf.title .chip{font-size:9px;padding:0 6px}
+.wf.h{background:none;padding:2px 0 0;font-size:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chips .wf{padding:2px 7px;border-radius:999px;font-size:10.5px;white-space:nowrap}
+.chips .wf.on{background:var(--fg);color:var(--bg)}
+.card{border:1px solid var(--line);border-radius:7px;padding:6px 8px;display:grid;grid-template-columns:36px 1fr;gap:8px;align-items:start}
+.card .wf.img{width:36px}
+.card b{display:block;color:var(--fg);font-weight:600}
+.card span{color:var(--muted);font-size:10.5px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 2px;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+.row b{font-weight:500;color:var(--fg)}
+.row.on{background:var(--tint);border-radius:5px;padding-inline:6px;border-bottom-color:var(--surface)}
+.row.on b{color:var(--accent)}
+.bignum{font-family:var(--head);font-size:76px;font-weight:700;line-height:1;text-align:center;color:var(--fg);font-variant-numeric:tabular-nums;margin-top:10px}
+.center{text-align:center}
+.center .big{font-size:14px;color:var(--fg);font-weight:600}
+.dots{display:flex;justify-content:center;gap:6px;margin-block:4px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--wire-2);display:block}
+.dots i.me{background:var(--accent);outline:2px solid var(--tint)}
+.dots i.srv{background:var(--muted)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.slots .wf{text-align:center;font-variant-numeric:tabular-nums;padding:4px 2px}
+.slots .wf.on{background:var(--accent);color:var(--accent-ink)}
+.slots .wf.off{opacity:.45;text-decoration:line-through}
+.spacer{flex:1}
+.note{font-size:10.5px;color:var(--muted);text-align:center}
+
+.desks{display:grid;grid-template-columns:1fr;gap:22px}
+@media (min-width:900px){.desks{grid-template-columns:1fr 1fr}.screen.wide{grid-column:span 2}}
+.desk{border:2px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden;font-size:11.5px;line-height:1.35;color:var(--fg)}
+.dbar{display:flex;align-items:center;gap:6px;padding:7px 10px;border-bottom:1px solid var(--line);color:var(--muted);font-size:10.5px}
+.dbar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+.dbar span{margin-left:6px}
+.dbody{padding:10px;display:grid;gap:10px}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:10px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:7px;padding:8px;min-width:0;display:grid;gap:6px;align-content:start}
+.panel .wf.title{font-size:12px}
+.cal{display:grid;grid-template-columns:40px 1fr 1fr;gap:3px;font-variant-numeric:tabular-nums}
+.cal .t{color:var(--muted);font-size:10px;padding-top:4px}
+.cal .h{font-weight:600;color:var(--fg);font-size:10.5px;padding:2px 4px}
+.cal .wf{font-size:10.5px}
+.cal .wf.blk{background:repeating-linear-gradient(135deg,var(--wire) 0 5px,var(--wire-2) 5px 6px)}
+.cal .wf.req{border:1px dashed var(--warn);background:var(--surface);color:var(--warn)}
+.cal .wf.on{color:var(--fg)}
+.q{display:grid;gap:4px}
+.q .wf{display:flex;gap:8px;align-items:center}
+.q .n{font-family:var(--mono);color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+.q .st{margin-left:auto;font-size:10px;white-space:nowrap}
+.q .wf.now{border:1px solid var(--accent);background:var(--tint);color:var(--fg)}
+.q .wf.now .st{color:var(--accent);font-weight:600}
+.btns{display:flex;gap:6px}
+.btns .wf.btn{flex:1}
+.desk .table-wrap{margin:0;border:0;border-radius:0;background:none}
+.wt{width:100%;border-collapse:collapse;font-size:11px;min-width:0}
+.wt th,.wt td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+.wt th{color:var(--muted);font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em}
+.wt td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pf{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.pf .wf.img{position:relative}
+.pf .wf.img span{position:absolute;left:4px;bottom:4px;background:var(--surface);border-radius:999px;padding:0 6px;font-size:9.5px;color:var(--muted);border:1px solid var(--line)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.tile{border:1px solid var(--line);border-radius:7px;padding:8px;min-width:0}
+.tile .k{color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.tile .v{font-family:var(--head);font-size:24px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .d{font-size:10px;color:var(--muted)}
+.tile ol{padding-left:16px;font-size:10.5px;margin-top:2px}
+.bars{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.bar{display:flex;flex-direction:column;justify-content:flex-end;height:64px;gap:3px;min-width:0}
+.bar i{display:block;background:var(--wire-2);border-radius:3px 3px 0 0;height:var(--h)}
+.bar small{font-size:9px;color:var(--muted);text-align:center}
+
+/* ---------- 5 architecture ---------- */
+.arch{display:grid;gap:0}
+.layer{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:12px 14px;display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:start}
+.layer .lname{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;padding-top:9px}
+.layer .lname small{display:block;text-transform:none;letter-spacing:0;font-weight:400;font-size:12px;margin-top:2px}
+.boxes{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.box{border:1px solid var(--line);border-radius:8px;padding:7px 12px;font-weight:500;font-size:14px;background:var(--bg);min-width:0}
+.box small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.box.rt{border-color:var(--accent);background:var(--tint)}
+.box.dashed{border-style:dashed;color:var(--muted);background:none}
+.lconn{display:flex;align-items:center;gap:12px;padding:4px 0 4px 40px;color:var(--muted);font-size:12.5px}
+.varrow{position:relative;width:2px;height:28px;background:var(--line);flex:none}
+.varrow::after{content:"";position:absolute;bottom:-1px;left:-5px;width:12px;height:9px;background:var(--muted);clip-path:polygon(0 0,100% 0,50% 100%)}
+.adr{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;font-size:14.5px}
+@media (max-width:640px){.layer{grid-template-columns:1fr;gap:6px}.layer .lname{padding-top:0}.lconn{padding-left:14px}}
+
+/* ---------- 6 data model ---------- */
+.entities{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.entity{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.entity h3{font-family:var(--mono);font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.entity h3 .chip{font-size:9.5px}
+.fields{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:12.5px;line-height:1.5;color:var(--fg)}
+.fields li{padding:2px 0;border-bottom:1px dotted var(--line);overflow-wrap:anywhere}
+.fields li:last-child{border-bottom:0}
+.fields em{font-style:normal;color:var(--muted)}
+.fields .k{color:var(--accent)}
+.entity .rels{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:6px;border-top:1px solid var(--line)}
+.entity .rels b{color:var(--fg);font-weight:500}
+
+/* ---------- 7 mvp / later ---------- */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:700px){.cols2{grid-template-columns:1fr}}
+.list{border-top:3px solid var(--good);padding-top:12px;min-width:0}
+.list.later{border-top-color:var(--warn)}
+.list h3{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.list ul{margin:10px 0 0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+
+/* ---------- 8 open questions ---------- */
+.qs{display:grid;gap:10px;padding-left:0;list-style:none;max-width:76ch}
+.qs li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;min-width:0}
+.qs li:last-child{border-bottom:0}
+.qs .n{font-family:var(--mono);color:var(--muted);font-size:13px;padding-top:2px}
+.qs b{font-weight:600}
+
+/* ---------- 9 ideas ---------- */
+.prose{max-width:72ch;font-size:15.5px;display:grid;gap:10px}
+.mirror{margin-top:22px;padding:12px 16px;border:1px dashed var(--muted);border-radius:8px;font-size:14px;color:var(--muted);max-width:72ch}
+.mirror code{font-family:var(--mono);font-size:13px;color:var(--fg)}
+
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">project-next · working title · draft v0.1 · proposal</p>
+  <h1>App sketch</h1>
+  <p class="pitch">Booking &amp; walk-in queue platform for barbers and hairdressers</p>
+  <p class="meta">A working sketch for Marcus, Alex and Naayi to look at and discuss. Roles are written as Platform / Provider / Stylist / Client throughout. Names, prices and numbers in the wireframes are example data. The product vision lives in <a href="https://github.com/mdbeatzxf/project-next/blob/main/docs/vision.md">docs/vision.md</a>.</p>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <a href="#problem">Problem → Solution</a>
+  <a href="#roles">Who is who</a>
+  <a href="#flows">Flows</a>
+  <a href="#screens">Screens</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#data">Data model</a>
+  <a href="#mvp">MVP vs later</a>
+  <a href="#questions">Open questions</a>
+  <a href="#ideas">Ideas &amp; to-dos</a>
+  <button type="button" id="themeBtn" aria-label="Switch colour theme">Theme: system</button>
+</nav>
+
+<main>
+
+<!-- 1 ============================================================ -->
+<section class="section" id="problem">
+  <div class="sec-head">
+    <h2>Problem → Solution</h2>
+    <p class="lead">What barbers, hairdressers and their clients struggle with today, as stated in the kickoff meeting, and what the app does about each point.</p>
+  </div>
+  <div class="pairs">
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Many barbershops and hairdressers (especially African and Turkish barbers in German cities, and mobile braiders who work from home or come to you) have no booking structure: personal phone numbers, WhatsApp or Instagram DMs, cash, no fixed slots.</div>
+      <div class="sol"><span class="lab">What we do</span>A Provider profile with services, prices, opening hours and stylists, plus a simple calendar in the Provider dashboard. Clients book a slot in the app; the Provider confirms or declines. No phone number needed on either side.</div>
+    </div>
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Clients walk in and do not know how long they will wait or how many people are ahead of them.</div>
+      <div class="sol"><span class="lab">What we do</span>The walk-in queue: join remotely, get a position, see "3 people ahead, ~35 min", get a push when it is nearly your turn. The Provider manages the same queue live with Next / Skip / Done.</div>
+    </div>
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Clients, especially Gen Z, do not want to hand out their phone number to book a haircut.</div>
+      <div class="sol"><span class="lab">What we do</span>No phone numbers are exchanged. All communication runs through in-app notifications and messages; contact data stays private on the Platform.</div>
+    </div>
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Clients new in a city do not know where to find a barber who can do their hair type or style ("I want an African hairdresser, where can I go?").</div>
+      <div class="sol"><span class="lab">What we do</span>Discovery by city or address with filters for specialty (African hair, Turkish barber, braids, locs, extensions, beard, women's / men's, kids), "comes to your place" vs "you go there", price range and open now. Portfolio photos show the work.</div>
+    </div>
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Existing platforms (Check24, eBay Kleinanzeigen, Google, Facebook Marketplace, generic booking tools) do not serve this niche; barbers do not use them.</div>
+      <div class="sol"><span class="lab">What we do</span>Niche first: built only for barbers and hairdressers, seeded city by city through the barber network. Trust comes from portfolio, reviews and a verification badge, not from a generic marketplace.</div>
+    </div>
+    <div class="pair">
+      <div class="prob"><span class="lab">Problem</span>Many barbers are not formally registered. Forcing online payment or invoicing would keep them away.</div>
+      <div class="sol"><span class="lab">What we do</span>Cash is the default and stays the default. Online payment (PayPal, bank transfer, in-app) is optional, comes later and is never required. The Platform never issues invoices on the Provider's behalf.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ============================================================ -->
+<section class="section" id="roles">
+  <div class="sec-head">
+    <h2>Who is who</h2>
+    <p class="lead">Three parties. The Provider is in the middle: our customer, and the one whose customers we help them serve.</p>
+  </div>
+
+  <div class="parties">
+    <div class="party platform">
+      <h3>Platform</h3>
+      <p class="who">Us: Marcus, Alex, Naayi. Admin side.</p>
+      <p class="who">Verifies providers, moderates photos and reviews, support, metrics, pricing config.</p>
+    </div>
+    <div class="rel" aria-label="Platform to Provider relation">
+      <span class="fwd">verifies, hosts, supports</span>
+      <span class="back">pays a fee (later), brings clients</span>
+    </div>
+    <div class="party provider">
+      <h3>Provider</h3>
+      <p class="who">A barbershop, a hair salon, or an independent / mobile stylist (barber, braider, hairdresser). Type: <code>shop</code> · <code>independent</code> · <code>mobile</code>.</p>
+      <div class="stylists">
+        <span class="k">has Stylists</span>
+        <span class="stylist">Stylist · Murat</span>
+        <span class="stylist">Stylist · Deniz</span>
+        <span class="stylist">… 1 to n</span>
+      </div>
+    </div>
+    <div class="rel" aria-label="Provider to Client relation">
+      <span class="fwd">confirms bookings, calls next, cuts hair</span>
+      <span class="back">books, joins queue, pays cash, reviews</span>
+    </div>
+    <div class="party client">
+      <h3>Client</h3>
+      <p class="who">The person who gets the haircut. Finds a Provider, books or joins the queue, pays at the chair, leaves a review.</p>
+    </div>
+  </div>
+
+  <p class="mapping">Provider = the platform's customer. Client = the provider's customer.</p>
+
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Role</th><th>Who</th><th>Does</th><th>Uses which app</th></tr></thead>
+      <tbody>
+        <tr><td>Platform</td><td>Us (admin side)</td><td>Provider verification, content moderation (photos, reviews), support, metrics, pricing config</td><td>Admin console</td></tr>
+        <tr><td>Provider</td><td>Barbershop, hair salon, independent or mobile stylist; owns one or more Stylists</td><td>Onboarding: profile, address or mobile radius, specialties, photos, services + prices, opening hours, staff. Runs calendar and live queue, accepts / declines bookings, handles no-shows, uploads portfolio, reads simple stats</td><td>Provider dashboard (web)</td></tr>
+        <tr><td>Stylist</td><td>Staff of a Provider; can be the owner</td><td>Appears as a bookable person; gets appointments per stylist; serves the queue</td><td>Provider dashboard (own view) <span class="dim">· detail unclear, to discuss</span></td></tr>
+        <tr><td>Client</td><td>End customer who gets a haircut</td><td>Discovers providers, views profile and portfolio, books an appointment or joins the walk-in queue, gets notified, pays cash by default, reviews, manages bookings (reminders, cancel / reschedule, history, favourites)</td><td>Client app (mobile-first web / PWA; native app later)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 3 ============================================================ -->
+<section class="section" id="flows">
+  <div class="sec-head">
+    <h2>How it works: flows</h2>
+    <p class="lead">The main path through the app for each side. Switch between the two.</p>
+  </div>
+
+  <div class="flow-head">
+    <div class="toggle" role="group" aria-label="Choose flow">
+      <button type="button" data-flow="client" aria-pressed="true">Client</button>
+      <button type="button" data-flow="provider" aria-pressed="false">Provider</button>
+    </div>
+    <span class="who" id="flowWho">Client: from "where can I get a fade near me" to a review.</span>
+  </div>
+
+  <div class="chain" id="flow-client">
+    <div class="seg"><div class="step">Discover<small>search by city / address, filter by specialty, comes-to-you, price, open now</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Profile<small>portfolio photos, services &amp; prices, hours, rating</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Choose service<small>e.g. Fade 15 €, stylist optional</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div>
+      <div class="fork">
+        <div class="step">Book slot<small>pick a time, request is confirmed by the Provider</small></div>
+        <em>or</em>
+        <div class="step hi">Join walk-in queue<small>remote, get a position</small></div>
+      </div>
+    </div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Get notified<small>reminder, or "you're next"</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Visit &amp; pay<small>cash by default, online optional later</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Review<small>rating 1–5, text, photos; only after a done booking</small></div></div>
+  </div>
+
+  <div class="chain" id="flow-provider" hidden>
+    <div class="seg"><div class="step">Sign up<small>as shop, independent or mobile stylist</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Verified<small>ID / business check by the Platform, badge on profile</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Set up profile<small>services, prices, hours, photos, stylists, address or service radius</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step daily">Daily: calendar + live queue<small>accept / decline requests, block times, Next / Skip / Done</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Done / no-show<small>close the booking or mark no-show</small></div></div>
+    <div class="seg"><div class="arrow" aria-hidden="true"></div><div class="step">Stats<small>bookings per week, popular services, revenue estimate (optional)</small></div></div>
+  </div>
+
+  <div class="hero-q">
+    <p class="kicker">Hero feature</p>
+    <h3>The walk-in queue</h3>
+    <p class="lead">A Client joins the queue from the phone before walking over. The Provider's board and the Client's screen show the same live queue. The estimated wait is people ahead × average service time of the chosen service.</p>
+    <figure style="margin:0">
+      <div class="lanes">
+        <svg viewBox="0 0 760 222" role="img" aria-label="Walk-in queue sequence across the Client app and the Provider board: the Client joins remotely and sees the position, the Provider board shows the queue in realtime, the Client gets a You're next push, the Provider taps Next and serves, then Done closes the entry.">
+          <defs>
+            <marker id="qa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" class="q-mk"/>
+            </marker>
+          </defs>
+          <rect class="ln-band" x="0.5" y="14.5" width="759" height="90" rx="8"/>
+          <rect class="ln-band prov" x="0.5" y="122.5" width="759" height="90" rx="8"/>
+          <text class="ln-lab" x="12" y="31">CLIENT APP</text>
+          <text class="ln-lab" x="12" y="139">PROVIDER BOARD</text>
+
+          <!-- 0 client: join -->
+          <rect class="q-box" x="12" y="44" width="108" height="48" rx="6"/>
+          <text class="q-t" x="66" y="64" text-anchor="middle">Join queue</text>
+          <text class="q-s" x="66" y="79" text-anchor="middle">remote, from profile</text>
+          <!-- 1 client: position -->
+          <rect class="q-box" x="138" y="44" width="108" height="48" rx="6"/>
+          <text class="q-t" x="192" y="64" text-anchor="middle">Position 4</text>
+          <text class="q-s" x="192" y="79" text-anchor="middle">3 ahead · ~35 min</text>
+          <!-- 2 provider: board -->
+          <rect class="q-box" x="264" y="152" width="108" height="48" rx="6"/>
+          <text class="q-t" x="318" y="172" text-anchor="middle">Board: 4 waiting</text>
+          <text class="q-s" x="318" y="187" text-anchor="middle">order + live wait</text>
+          <!-- 3 client: push -->
+          <rect class="q-box hi" x="390" y="44" width="108" height="48" rx="6"/>
+          <text class="q-ink" x="444" y="64" text-anchor="middle">"You're next"</text>
+          <text class="q-ink-s" x="444" y="79" text-anchor="middle">push notification</text>
+          <!-- 4 provider: serving -->
+          <rect class="q-box" x="516" y="152" width="108" height="48" rx="6"/>
+          <text class="q-t" x="570" y="172" text-anchor="middle">Next → serving</text>
+          <text class="q-s" x="570" y="187" text-anchor="middle">client in the chair</text>
+          <!-- 5 provider: done -->
+          <rect class="q-box" x="642" y="152" width="108" height="48" rx="6"/>
+          <text class="q-t" x="696" y="172" text-anchor="middle">Done</text>
+          <text class="q-s" x="696" y="187" text-anchor="middle">entry closed</text>
+
+          <!-- arrows -->
+          <path class="q-arr" d="M120 68 H134" marker-end="url(#qa)"/>
+          <path class="q-arr" d="M192 92 V113 H318 V148" marker-end="url(#qa)"/>
+          <text class="q-al" x="255" y="109" text-anchor="middle">realtime</text>
+          <path class="q-arr" d="M318 152 V113 H444 V96" marker-end="url(#qa)"/>
+          <text class="q-al" x="381" y="109" text-anchor="middle">when 1 ahead</text>
+          <path class="q-arr" d="M444 92 V113 H570 V148" marker-end="url(#qa)"/>
+          <text class="q-al" x="507" y="109" text-anchor="middle">client walks in</text>
+          <path class="q-arr" d="M624 176 H638" marker-end="url(#qa)"/>
+        </svg>
+      </div>
+      <figcaption>Realtime: the queue table is pushed to both screens on every change (Supabase Realtime or WebSockets, see architecture). Walk-ins without the app are added by the Provider with a name only.</figcaption>
+    </figure>
+    <div class="states">
+      <span class="k">QueueEntry.status</span>
+      <span class="pill waiting">waiting</span><span class="arrow" aria-hidden="true"></span>
+      <span class="pill called">called</span><span class="arrow" aria-hidden="true"></span>
+      <span class="pill serving">serving</span><span class="arrow" aria-hidden="true"></span>
+      <span class="pill done">done</span>
+      <span>· from waiting or called:</span>
+      <span class="pill left">left</span>
+      <span>(Client leaves, or Provider skips twice)</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ============================================================ -->
+<section class="section" id="screens">
+  <div class="sec-head">
+    <h2>Screens</h2>
+    <p class="lead">Wireframes, not design. Grey blocks are placeholders. All names, prices and numbers are example data. The real UI is in <a href="https://github.com/mdbeatzxf/project-next/tree/main/docs/design/round-one">design round one</a> (Claude Design export); frame names there match these screens.</p>
+  </div>
+
+  <p class="sub">Client app · mobile-first web (PWA)</p>
+  <div class="phones">
+
+    <div class="screen">
+      <div class="screen-head"><h3>Home / Search</h3><span class="chip mvp">MVP</span><p>Discover by city, filter by specialty.</p></div>
+      <div class="phone" aria-label="Wireframe: Home and search">
+        <div class="pbar"><span>14:02</span><span>●●● ▮</span></div>
+        <div class="wf input"><b>Berlin, Neukölln</b><span>⌖ locate</span></div>
+        <div class="chips">
+          <span class="wf on">Specialty ▾</span><span class="wf">Comes to you</span><span class="wf">Open now</span><span class="wf">Price ▾</span>
+        </div>
+        <div class="wf h">24 providers nearby</div>
+        <div class="card"><div class="wf img"></div><div><b>Kings Cuts Neukölln</b><span>Turkish barber · fade, beard · 4.8 ★ (132) · 1.2 km · open</span></div></div>
+        <div class="card"><div class="wf img"></div><div><b>Ama's Braids (mobile)</b><span>braids, locs · comes to you · from 60 € · 4.9 ★ (41)</span></div></div>
+        <div class="card"><div class="wf img"></div><div><b>Salon Nadia</b><span>women's, extensions, colour · 4.6 ★ (88) · 2.4 km</span></div></div>
+        <div class="card"><div class="wf img"></div><div><b>Afro Lounge Wedding</b><span>African hair, kids · 4.7 ★ (56) · 3.1 km · queue: 2</span></div></div>
+        <div class="spacer"></div>
+        <div class="wf">map view (OpenStreetMap)</div>
+        <div class="chips"><span class="wf on">Search</span><span class="wf">Bookings</span><span class="wf">Favourites</span><span class="wf">Me</span></div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-head"><h3>Provider profile</h3><span class="chip mvp">MVP</span><p>Portfolio as evidence, prices set by the Provider.</p></div>
+      <div class="phone" aria-label="Wireframe: Provider profile">
+        <div class="pbar"><span>14:03</span><span>●●● ▮</span></div>
+        <div class="wf img wide"></div>
+        <div class="wf title">Kings Cuts Neukölln <span class="chip mvp">verified</span></div>
+        <div class="wf h">4.8 ★ · 132 reviews · Turkish barber · Sonnenallee</div>
+        <div class="grid3"><div class="wf img"></div><div class="wf img"></div><div class="wf img"></div></div>
+        <div class="wf h">Services</div>
+        <div class="row"><b>Fade</b><span>30 min · 15 €</span></div>
+        <div class="row"><b>Beard trim</b><span>15 min · 8 €</span></div>
+        <div class="row"><b>Fade + beard</b><span>45 min · 20 €</span></div>
+        <div class="row"><b>Kids cut</b><span>20 min · 12 €</span></div>
+        <div class="wf h">Hours · Mon–Sat 10–20 · now open</div>
+        <div class="wf">Queue now: 3 waiting · ~35 min · Murat, Deniz</div>
+        <div class="spacer"></div>
+        <div class="wf btn primary">Book</div>
+        <div class="wf btn ghost">Join queue</div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-head"><h3>Booking</h3><span class="chip mvp">MVP</span><p>Service, stylist (optional), slot. No payment.</p></div>
+      <div class="phone" aria-label="Wireframe: Booking">
+        <div class="pbar"><span>14:04</span><span>●●● ▮</span></div>
+        <div class="wf title">Book at Kings Cuts</div>
+        <div class="wf h">1 · Service</div>
+        <div class="row on"><b>Fade</b><span>30 min · 15 €</span></div>
+        <div class="row"><b>Beard trim</b><span>15 min · 8 €</span></div>
+        <div class="row"><b>Fade + beard</b><span>45 min · 20 €</span></div>
+        <div class="wf h">2 · Stylist (optional)</div>
+        <div class="chips"><span class="wf on">Any</span><span class="wf">Murat</span><span class="wf">Deniz</span></div>
+        <div class="wf h">3 · Day</div>
+        <div class="chips"><span class="wf">Tue 6</span><span class="wf on">Wed 7</span><span class="wf">Thu 8</span><span class="wf">Fri 9</span></div>
+        <div class="wf h">4 · Time</div>
+        <div class="slots">
+          <span class="wf off">10:00</span><span class="wf">10:30</span><span class="wf">11:00</span><span class="wf off">11:30</span>
+          <span class="wf">12:00</span><span class="wf on">12:30</span><span class="wf">13:00</span><span class="wf off">13:30</span>
+          <span class="wf">16:00</span><span class="wf">16:30</span><span class="wf">17:00</span><span class="wf">17:30</span>
+        </div>
+        <div class="wf input"><b>Note to the shop (optional)</b></div>
+        <div class="spacer"></div>
+        <div class="note">Pay cash at the shop. No phone number shared.</div>
+        <div class="wf btn primary">Request booking · Wed 12:30</div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-head"><h3>Queue status</h3><span class="chip mvp">MVP</span><p>After joining the walk-in queue.</p></div>
+      <div class="phone" aria-label="Wireframe: Queue status">
+        <div class="pbar"><span>14:05</span><span>●●● ▮</span></div>
+        <div class="wf title">Kings Cuts Neukölln</div>
+        <div class="wf h">joined 14:02 · Fade · any stylist</div>
+        <div class="bignum">3</div>
+        <div class="center big">people ahead of you</div>
+        <div class="center">estimated wait <b>~35 min</b> · your turn around 14:40</div>
+        <div class="dots" aria-hidden="true"><i class="srv"></i><i></i><i></i><i></i><i class="me"></i><i></i></div>
+        <div class="wf">We will notify you when one person is ahead of you.</div>
+        <div class="wf">Status: <b>waiting</b> · position 4 of 6</div>
+        <div class="wf">Address: Sonnenallee 112 · 6 min walk</div>
+        <div class="spacer"></div>
+        <div class="wf btn quiet">Leave queue</div>
+        <div class="note">Leaving frees your spot for the next person.</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sub">Provider dashboard · web</p>
+  <div class="desks">
+
+    <div class="screen wide">
+      <div class="screen-head"><h3>Today: calendar + live queue</h3><span class="chip mvp">MVP</span><p>One screen for the working day. Appointments per Stylist on the left, the walk-in queue on the right.</p></div>
+      <div class="desk" aria-label="Wireframe: Provider dashboard, today">
+        <div class="dbar"><i></i><i></i><i></i><span>dashboard · Kings Cuts Neukölln · Tue 6 Oct 2026</span></div>
+        <div class="dbody">
+          <div class="two">
+            <div class="panel">
+              <div class="wf title">Calendar · today <span>week ▸</span></div>
+              <div class="cal">
+                <div class="t"></div><div class="h">Murat</div><div class="h">Deniz</div>
+                <div class="t">10:00</div><div class="wf on">Fade · Jonas K.</div><div class="wf on">Beard trim · Ali</div>
+                <div class="t">10:30</div><div class="wf on">Fade + beard · Sam</div><div class="wf blk">break</div>
+                <div class="t">11:00</div><div class="wf req">request · Kids cut · Leon · accept / decline</div><div class="wf on">Fade · Tobi</div>
+                <div class="t">11:30</div><div class="wf">free</div><div class="wf">free</div>
+                <div class="t">12:00</div><div class="wf blk">blocked</div><div class="wf on">Fade · Mehmet</div>
+                <div class="t">12:30</div><div class="wf on">Fade · new request</div><div class="wf">free</div>
+              </div>
+              <div class="btns"><div class="wf btn ghost">Block time</div><div class="wf btn ghost">Add booking</div></div>
+            </div>
+            <div class="panel">
+              <div class="wf title">Live queue <span>4 waiting · ~50 min</span></div>
+              <div class="q">
+                <div class="wf now"><span class="n">#1</span><span>Samuel · Fade</span><span class="st">called 14:10</span></div>
+                <div class="wf"><span class="n">#2</span><span>walk-in: Ali · Beard</span><span class="st">waiting</span></div>
+                <div class="wf"><span class="n">#3</span><span>Tobi · Fade + beard</span><span class="st">waiting</span></div>
+                <div class="wf"><span class="n">#4</span><span>Leon · Fade</span><span class="st">waiting</span></div>
+              </div>
+              <div class="btns"><div class="wf btn primary">Next</div><div class="wf btn ghost">Skip</div><div class="wf btn ghost">Done</div></div>
+              <div class="wf">Now serving: Mehmet (Deniz) · since 14:02</div>
+              <div class="wf input"><b>+ add walk-in by name</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-head"><h3>Services &amp; prices · Portfolio</h3><span class="chip mvp">MVP</span><p>Prices are set by the Provider; photos tagged by style.</p></div>
+      <div class="desk" aria-label="Wireframe: Services and portfolio">
+        <div class="dbar"><i></i><i></i><i></i><span>dashboard · services &amp; portfolio</span></div>
+        <div class="dbody">
+          <div class="panel">
+            <div class="wf title">Services <span>+ add</span></div>
+            <div class="table-wrap">
+              <table class="wt">
+                <thead><tr><th>Service</th><th>Category</th><th>Duration</th><th>Price</th><th>At home</th></tr></thead>
+                <tbody>
+                  <tr><td>Fade</td><td>men's</td><td class="num">30 min</td><td class="num">15 €</td><td>no</td></tr>
+                  <tr><td>Beard trim</td><td>beard</td><td class="num">15 min</td><td class="num">8 €</td><td>no</td></tr>
+                  <tr><td>Fade + beard</td><td>men's</td><td class="num">45 min</td><td class="num">20 €</td><td>no</td></tr>
+                  <tr><td>Kids cut</td><td>kids</td><td class="num">20 min</td><td class="num">12 €</td><td>no</td></tr>
+                  <tr><td>Braids</td><td>braids</td><td class="num">120 min</td><td class="num">from 60 €</td><td>yes</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="wf title">Portfolio <span>↑ upload</span></div>
+            <div class="pf">
+              <div class="wf img"><span>fade</span></div><div class="wf img"><span>fade</span></div><div class="wf img"><span>beard</span></div><div class="wf img"><span>braids</span></div>
+              <div class="wf img"><span>locs</span></div><div class="wf img"><span>kids</span></div><div class="wf img"><span>fade</span></div><div class="wf img"><span>+</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-head"><h3>Stats</h3><span class="chip later">later</span><p>Simple numbers; revenue only if the Provider tracks cash.</p></div>
+      <div class="desk" aria-label="Wireframe: Stats">
+        <div class="dbar"><i></i><i></i><i></i><span>dashboard · stats · this week</span></div>
+        <div class="dbody">
+          <div class="tiles">
+            <div class="tile"><div class="k">Bookings this week</div><div class="v">42</div><div class="d">+6 vs last week</div></div>
+            <div class="tile"><div class="k">No-shows</div><div class="v">3</div><div class="d">7 % of bookings</div></div>
+            <div class="tile"><div class="k">Queue served</div><div class="v">118</div><div class="d">avg wait 28 min</div></div>
+            <div class="tile"><div class="k">Top services</div><ol><li>Fade</li><li>Fade + beard</li><li>Beard trim</li></ol></div>
+          </div>
+          <div class="panel">
+            <div class="wf title">Bookings per day</div>
+            <div class="bars" aria-hidden="true">
+              <div class="bar" style="--h:45%"><i></i><small>Mon</small></div>
+              <div class="bar" style="--h:60%"><i></i><small>Tue</small></div>
+              <div class="bar" style="--h:50%"><i></i><small>Wed</small></div>
+              <div class="bar" style="--h:70%"><i></i><small>Thu</small></div>
+              <div class="bar" style="--h:95%"><i></i><small>Fri</small></div>
+              <div class="bar" style="--h:100%"><i></i><small>Sat</small></div>
+              <div class="bar" style="--h:10%"><i></i><small>Sun</small></div>
+            </div>
+            <div class="wf">Revenue estimate: 1 240 € (cash, tracked optionally)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ============================================================ -->
+<section class="section" id="architecture">
+  <div class="sec-head">
+    <h2>Architecture <span class="chip prop">proposal</span></h2>
+    <p class="lead">Web-first, one monorepo in this GitHub repo. Three apps on one backend. Realtime only where it matters: the queue.</p>
+  </div>
+
+  <div class="arch">
+    <div class="layer">
+      <div class="lname">Apps<small>what people open</small></div>
+      <div class="boxes">
+        <div class="box">Client app<small>responsive PWA, mobile-first</small></div>
+        <div class="box">Provider dashboard<small>web, desktop and tablet</small></div>
+        <div class="box">Admin console<small>Platform side</small></div>
+      </div>
+    </div>
+    <div class="lconn"><span class="varrow" aria-hidden="true"></span><span>HTTPS for everything · WebSocket / Realtime channel for the live queue and the calendar</span></div>
+    <div class="layer">
+      <div class="lname">Backend / API<small>one service, modules</small></div>
+      <div class="boxes">
+        <div class="box">Auth<small>one user, several roles</small></div>
+        <div class="box">Providers<small>profile, stylists, services, hours</small></div>
+        <div class="box">Bookings<small>slots, status, no-show</small></div>
+        <div class="box rt">Queue (realtime)<small>position, est. wait, Next / Skip / Done</small></div>
+        <div class="box">Notifications<small>push + email</small></div>
+        <div class="box">Media<small>portfolio photos</small></div>
+        <div class="box">Reviews<small>after a done booking</small></div>
+      </div>
+    </div>
+    <div class="lconn"><span class="varrow" aria-hidden="true"></span><span>managed services where possible; three part-time people should not run servers</span></div>
+    <div class="layer">
+      <div class="lname">Infra<small>managed</small></div>
+      <div class="boxes">
+        <div class="box">Postgres<small>+ PostGIS or lat/lng + radius</small></div>
+        <div class="box">Object storage<small>photos</small></div>
+        <div class="box">Push / Email<small>web push, email; SMS / WhatsApp later</small></div>
+        <div class="box">Maps / Geo<small>OpenStreetMap tiles, Leaflet</small></div>
+        <div class="box dashed">Payments<small>optional, later · Stripe or PayPal</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="tbl">
+      <thead><tr><th>Layer</th><th>Proposal</th><th>Alternative</th></tr></thead>
+      <tbody>
+        <tr><td>Repo</td><td>Monorepo in this GitHub repo. Web-first (responsive PWA), native apps later.</td><td class="dim">—</td></tr>
+        <tr><td>Frontend</td><td>TypeScript + React (Next.js) for the Client app and the Provider dashboard; two apps or one app with roles.</td><td>Flutter for mobile + web, if the team prefers.</td></tr>
+        <tr><td>Backend</td><td>Supabase: Postgres, Auth, Realtime (live queue), Storage (photos). Chosen to move fast with three part-time people.</td><td>Node / NestJS + Postgres + WebSockets.</td></tr>
+        <tr><td>Notifications</td><td>Web push + email first.</td><td class="dim">SMS / WhatsApp later.</td></tr>
+        <tr><td>Maps / geo</td><td>PostGIS, or simple lat/lng + radius. Map tiles via OpenStreetMap / Leaflet.</td><td class="dim">—</td></tr>
+        <tr><td>Payments</td><td>None in the MVP (cash). Later and optional: Stripe or PayPal.</td><td class="dim">—</td></tr>
+        <tr><td>Hosting / CI</td><td>Vercel (frontend) + Supabase; CI via GitHub Actions.</td><td class="dim">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="adr"><span class="chip prop">proposal</span><span>Decided in <a href="https://github.com/mdbeatzxf/project-next/blob/main/docs/decisions/0001-tech-stack.md">ADR-0001</a>, status: proposed. To be decided at the next meeting.</span></p>
+</section>
+
+<!-- 6 ============================================================ -->
+<section class="section" id="data">
+  <div class="sec-head">
+    <h2>Data model</h2>
+    <p class="lead">Entities and their fields as proposed for v0.1. Optional fields end with <code>?</code>; enums in brackets.</p>
+  </div>
+  <div class="entities">
+
+    <article class="entity">
+      <h3>Provider</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>name</li><li>type <em>[shop | independent | mobile]</em></li><li>description</li><li>address</li><li>lat, lng</li><li>service_radius_km</li><li>specialties[]</li><li>opening_hours</li><li>verified</li><li>rating_avg</li><li>created_at</li>
+      </ul>
+      <p class="rels"><b>Provider</b> 1—n Stylist · 1—n Service · 1—n PortfolioPhoto · 1—n Booking · 1—n QueueEntry · 1—n Review</p>
+    </article>
+
+    <article class="entity">
+      <h3>Stylist</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>provider_id</li><li>name</li><li>specialties[]</li><li>active</li>
+      </ul>
+      <p class="rels"><b>Stylist</b> n—1 Provider · 1—n Booking (optional) · 1—n PortfolioPhoto (optional)</p>
+    </article>
+
+    <article class="entity">
+      <h3>Service</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>provider_id</li><li>name</li><li>category</li><li>duration_min</li><li>price_cents</li><li>at_client_home <em>bool</em></li>
+      </ul>
+      <p class="rels"><b>Service</b> n—1 Provider · 1—n Booking</p>
+    </article>
+
+    <article class="entity">
+      <h3>PortfolioPhoto</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>provider_id</li><li>stylist_id?</li><li>url</li><li>style_tags[]</li><li>created_at</li>
+      </ul>
+      <p class="rels"><b>PortfolioPhoto</b> n—1 Provider · n—1 Stylist (optional)</p>
+    </article>
+
+    <article class="entity">
+      <h3>Client</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>display_name</li><li>email / phone <em>(private)</em></li><li>home_city</li><li>created_at</li>
+      </ul>
+      <p class="rels"><b>Client</b> 1—n Booking · 1—n QueueEntry · 1—n Review</p>
+    </article>
+
+    <article class="entity">
+      <h3>Booking</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>provider_id</li><li>stylist_id?</li><li>client_id</li><li>service_id</li><li>starts_at, ends_at</li><li>status <em>[requested | confirmed | in_progress | done | cancelled | no_show]</em></li><li>payment_method <em>[cash | online]</em></li><li>notes</li>
+      </ul>
+      <p class="rels"><b>Booking</b> n—1 Client · n—1 Provider · n—1 Service · n—1 Stylist (optional) · 1—1 Review (after done)</p>
+    </article>
+
+    <article class="entity">
+      <h3>QueueEntry <span class="chip mvp">hero</span></h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>provider_id</li><li>client_id?</li><li>walk_in_name?</li><li>joined_at</li><li>position</li><li>status <em>[waiting | called | serving | done | left]</em></li><li>est_wait_min</li>
+      </ul>
+      <p class="rels"><b>QueueEntry</b> n—1 Provider · n—1 Client (optional; walk_in_name when added at the counter)</p>
+    </article>
+
+    <article class="entity">
+      <h3>Review</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>booking_id</li><li>client_id</li><li>provider_id</li><li>rating <em>1–5</em></li><li>text</li><li>photos[]</li><li>created_at</li>
+      </ul>
+      <p class="rels"><b>Review</b> n—1 Booking · n—1 Client · n—1 Provider</p>
+    </article>
+
+    <article class="entity">
+      <h3>Notification</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>user_id</li><li>type</li><li>payload</li><li>sent_at</li><li>read_at</li>
+      </ul>
+      <p class="rels"><b>Notification</b> n—1 User</p>
+    </article>
+
+    <article class="entity">
+      <h3>User / Auth</h3>
+      <ul class="fields">
+        <li><span class="k">id</span></li><li>roles[] <em>client, provider owner, stylist</em></li><li><em>other fields open</em></li>
+      </ul>
+      <p class="rels"><b>User</b> 1—1 Client (optional) · 1—n Notification · can be a client and a provider owner / stylist at the same time</p>
+    </article>
+  </div>
+</section>
+
+<!-- 7 ============================================================ -->
+<section class="section" id="mvp">
+  <div class="sec-head">
+    <h2>MVP vs later</h2>
+    <p class="lead">v0.1 is the smallest thing a pilot barber can run a day with. Everything else waits.</p>
+  </div>
+  <div class="cols2">
+    <div class="list">
+      <h3>MVP <span class="chip mvp">v0.1</span></h3>
+      <ul>
+        <li>Provider profile + services / prices + portfolio</li>
+        <li>Client discovery by city + specialty</li>
+        <li>Simple appointment booking (no payment)</li>
+        <li>Walk-in queue with "people ahead of me"</li>
+        <li>Notifications (push / email)</li>
+        <li>Provider dashboard (calendar + queue)</li>
+        <li>Reviews after a done booking</li>
+        <li>Admin verification</li>
+      </ul>
+    </div>
+    <div class="list later">
+      <h3>Later <span class="chip later">after v0.1</span></h3>
+      <ul>
+        <li>Online payment (PayPal, bank transfer, in-app; always optional)</li>
+        <li>Multi-stylist scheduling optimisation</li>
+        <li>Loyalty</li>
+        <li>Product sales (hair extensions / colour ordering idea from the meeting)</li>
+        <li>Other service categories</li>
+        <li>Other countries</li>
+        <li>Native apps</li>
+        <li>WhatsApp integration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ============================================================ -->
+<section class="section" id="questions">
+  <div class="sec-head">
+    <h2>Open questions</h2>
+    <p class="lead">Nothing here is decided. Bring answers to the next meeting or open an issue.</p>
+  </div>
+  <ul class="qs">
+    <li><span class="n">Q1</span><span><b>Name / brand, legal form, who owns what, time budget per person.</b> All three have other commitments; Marcus said this cannot be pulled off alone.</span></li>
+    <li><span class="n">Q2</span><span><b>Build fresh or reuse Alex's existing marketplace code (Service Scout)?</b></span></li>
+    <li><span class="n">Q3</span><span><b>First cities, first 5–10 pilot providers, survey questions for barbers.</b> A first vendor contact exists (a hairdresser friend); use the first vendors to validate.</span></li>
+    <li><span class="n">Q4</span><span><b>Pricing model and when to switch from free to paid.</b> Options discussed: small fee per booking (a haircut is ~10–25 €), later a subscription for shops, premium placement.</span></li>
+    <li><span class="n">Q5</span><span><b>Legal: GDPR, Impressum, terms, handling providers who are not registered businesses, review law.</b></span></li>
+    <li><span class="n">Q6</span><span><b>Tech stack.</b> Proposal above and in ADR-0001; to be decided at the next meeting.</span></li>
+  </ul>
+</section>
+
+<!-- 9 ============================================================ -->
+<section class="section" id="ideas">
+  <div class="sec-head">
+    <h2>Ideas &amp; to-dos</h2>
+  </div>
+  <div class="prose">
+    <p>Ideas and tasks live in the repo as Markdown: <code>docs/ideas.md</code> is the idea backlog (with a template entry) and <code>docs/todo.md</code> is the to-do list with owners. Anyone adds an entry by opening a pull request, or files a GitHub Issue using the "idea" or "todo" template and we move it into the Markdown lists when we triage. Keeping both in the repo means every session, human or AI, sees the same list.</p>
+  </div>
+  <div class="btn-row">
+    <a class="btn primary" href="https://github.com/mdbeatzxf/project-next/blob/main/docs/ideas.md">docs/ideas.md</a>
+    <a class="btn" href="https://github.com/mdbeatzxf/project-next/blob/main/docs/todo.md">docs/todo.md</a>
+    <a class="btn" href="https://github.com/mdbeatzxf/project-next/issues/new/choose">New GitHub Issue</a>
+  </div>
+  <p class="mirror">This page mirrors <code>docs/app-sketch.md</code> (<a href="https://github.com/mdbeatzxf/project-next/blob/main/docs/app-sketch.md">open on GitHub</a>); when one changes, update the other.</p>
+</section>
+
+</main>
+
+<footer>
+  <span>project-next · draft v0.1 · 2026-10-06</span>
+  <span>everything marked proposal is open for discussion</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* theme: system / light / dark (only touches data-theme after a click or a stored choice) */
+  var themeBtn = document.getElementById('themeBtn');
+  var order = ['system', 'light', 'dark'];
+  var theme = 'system';
+  try { theme = localStorage.getItem('pn-theme') || 'system'; } catch (e) {}
+  function applyTheme(v, touch) {
+    if (v === 'system') { if (touch) root.removeAttribute('data-theme'); }
+    else { root.setAttribute('data-theme', v); }
+    themeBtn.textContent = 'Theme: ' + v;
+  }
+  applyTheme(theme, false);
+  themeBtn.addEventListener('click', function () {
+    theme = order[(order.indexOf(theme) + 1) % order.length];
+    applyTheme(theme, true);
+    try { localStorage.setItem('pn-theme', theme); } catch (e) {}
+  });
+
+  /* flow toggle: both chains stay in the DOM, one is hidden */
+  var flowBtns = Array.prototype.slice.call(document.querySelectorAll('[data-flow]'));
+  var flowWho = document.getElementById('flowWho');
+  var whoText = {
+    client: 'Client: from "where can I get a fade near me" to a review.',
+    provider: 'Provider: from sign-up to a normal working day.'
+  };
+  flowBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var which = b.getAttribute('data-flow');
+      flowBtns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      document.getElementById('flow-client').hidden = which !== 'client';
+      document.getElementById('flow-provider').hidden = which !== 'provider';
+      flowWho.textContent = whoText[which];
+    });
+  });
+
+  /* sticky nav: highlight the section crossing the middle of the viewport */
+  var nav = document.querySelector('.nav');
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  function setActive(id) {
+    var target = byId[id];
+    if (!target) return;
+    links.forEach(function (a) {
+      var on = a === target;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    var left = target.offsetLeft - nav.clientWidth / 2 + target.offsetWidth / 2;
+    try { nav.scrollTo({ left: left, behavior: reduce ? 'auto' : 'smooth' }); } catch (e) { nav.scrollLeft = left; }
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) setActive(en.target.id); });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+    Object.keys(byId).forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) io.observe(s);
+    });
+  }
+  links.forEach(function (a) { a.addEventListener('click', function () { setActive(a.getAttribute('href').slice(1)); }); });
+})();
+</script>
+</body>
+</html>

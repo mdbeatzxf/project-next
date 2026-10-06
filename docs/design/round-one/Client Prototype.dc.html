@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="pn.css">
+<style>body{margin:0;background:#09090b}a{color:#7aa2ff}a:hover{color:#3b74ff}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;gap:48px;justify-content:center;align-items:center;flex-wrap:wrap;padding:32px;background:#09090b;color:#fafafa;font-family:var(--font-body)">
+  <div style="box-shadow:0 0 0 10px #18181b,0 0 0 12px #27272a,0 30px 80px #000;flex:none;border-radius:48px;overflow:hidden">
+    <dc-import name="Client Screen" screen="{{ start }}" theme="{{ theme }}" hint-size="390px,844px"></dc-import>
+  </div>
+  <div style="width:280px;display:flex;flex-direction:column;gap:6px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7aa2ff">Prototype</div>
+    <h1 style="font-size:32px;margin:0 0 8px">Client app</h1>
+    <p style="font-size:15px;color:#a1a1aa;margin:0 0 12px">Tap through from onboarding: login, search, profile, Book or Join queue. On the queue screen, Directions steps through the live states. Jump to a start point:</p>
+    <sc-for list="{{ jumps }}" as="j" hint-placeholder-count="6">
+      <button class="btn btn-secondary" onClick="{{ j.go }}" style="min-height:44px;justify-content:space-between;color:#fafafa;border:2px solid #ffffff26;font-size:15px">{{ j.n }}<span style="color:#a1a1aa;font-weight:600">{{ j.k }}</span></button>
+    </sc-for>
+    <a href="02 Client App.dc.html" style="margin-top:12px;font-size:15px">All frames →</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state={start:'onb1'};
+  renderVals(){ return { start:this.state.start, theme:this.props.theme||'dark',
+    jumps:[['Onboarding','onb1'],['Home / Search','home'],['Provider profile','profile'],['Booking flow','bSvc'],['Queue status','qWait'],['My bookings','bookings']].map(([n,k])=>({n,k,go:()=>this.setState({start:k})})) }; }
+}
+</script>
+</body>
+</html>

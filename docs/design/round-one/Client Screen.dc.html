@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="pn.css">
+<script src="icons.js"></script>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="{{ label }}" style="width:390px;height:844px;position:relative;overflow:hidden;background:var(--color-bg);color:var(--color-text);display:flex;flex-direction:column;font-family:var(--font-body);font-size:16px;line-height:1.45">
+
+<sc-if value="{{ showStatus }}" hint-placeholder-val="{{ true }}">
+<div style="height:50px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px 32px;font-weight:600;font-size:16px"><span>14:32</span><span style="display:flex;align-items:center;gap:6px;font-size:13px">5G <span style="width:24px;height:12px;border:1.5px solid currentColor;padding:1px;display:flex"><span style="flex:0 0 70%;background:currentColor"></span></span></span></div>
+</sc-if>
+
+<div style="flex:1;min-height:0;position:relative;display:flex;flex-direction:column">
+
+<!-- ONBOARDING 1 -->
+<sc-if value="{{ is.onb1 }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column">
+  <div style="padding:8px 20px 14px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:18px;letter-spacing:-.02em">project-next</span><button class="btn btn-ghost" onClick="{{ go.login }}" style="min-height:44px;font-size:15px">Skip</button></div>
+  <div class="ph" style="flex:1;margin:0 20px;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px);display:flex;align-items:flex-end;padding:10px"><span style="font:600 11px/1 ui-monospace,monospace;background:var(--color-bg);padding:5px 7px">PHOTO · skin fade, close-up</span></div>
+  <div style="padding:22px 20px 0;display:flex;gap:6px"><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span></div>
+  <div style="padding:20px 20px 0">
+    <h1 style="font-size:36px;line-height:1.02;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance">Find your barber. Book a chair or join the queue.</h1>
+    <p style="margin:0;color:var(--pn-muted);font-size:17px;text-wrap:pretty">See real cuts and real prices near you. We ping you when it is nearly your turn.</p>
+  </div>
+  <div style="padding:24px 20px 44px"><button class="btn btn-primary" onClick="{{ go.onb2 }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Next{{ ic.arrow }}</button></div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 2 -->
+<sc-if value="{{ is.onb2 }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column">
+  <div style="padding:8px 8px 0;display:flex;justify-content:space-between;align-items:center"><button class="btn btn-icon" onClick="{{ go.onb1 }}" aria-label="Back" style="width:48px;height:48px">{{ ic.back }}</button><button class="btn btn-ghost" onClick="{{ go.login }}" style="min-height:44px;font-size:15px;margin-right:12px">Skip</button></div>
+  <div style="padding:8px 20px 0;display:flex;gap:6px"><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span></div>
+  <div style="padding:28px 20px 8px"><h1 style="font-size:36px;line-height:1.02;letter-spacing:-.03em;margin:0 0 10px">Where do you get your cut?</h1><p style="margin:0;color:var(--pn-muted);font-size:17px">We start in four cities. More soon.</p></div>
+  <div style="padding:16px 20px 0">
+    <button class="btn btn-secondary" style="width:100%;min-height:52px;justify-content:flex-start;gap:12px;font-size:16px;border:1px solid var(--color-strong);border-radius:12px;padding:0 16px">{{ ic.nav }}Use my location</button>
+  </div>
+  <div style="padding:16px 20px 0;flex:1">
+    <sc-for list="{{ cities }}" as="c" hint-placeholder-count="4">
+      <label class="radio" style="display:flex;width:100%;min-height:64px;gap:14px;border-bottom:1px solid var(--color-divider);font-size:18px">
+        <input type="radio" name="{{ nm.city }}" checked="{{ c.on }}" onChange="{{ c.pick }}">
+        <span class="dot" style="width:22px;height:22px"></span>
+        <span style="display:flex;flex-direction:column;line-height:1.2"><span style="font-weight:700">{{ c.n }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ c.sub }}</span></span>
+      </label>
+    </sc-for>
+  </div>
+  <div style="padding:20px 20px 44px"><button class="btn btn-primary" onClick="{{ go.onbHair }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Continue with Berlin{{ ic.arrow }}</button></div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 3 · ABOUT YOUR HAIR -->
+<sc-if value="{{ is.onbHair }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+  <div style="padding:8px 8px 0;display:flex;justify-content:space-between;align-items:center"><button class="btn btn-icon" onClick="{{ go.onb2 }}" aria-label="Back" style="width:48px;height:48px">{{ ic.back }}</button><button class="btn btn-ghost" onClick="{{ go.onb3 }}" style="min-height:44px;font-size:15px;margin-right:12px">Skip</button></div>
+  <div style="padding:8px 20px 0;display:flex;gap:6px"><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-divider)"></span></div>
+  <div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:24px 20px 16px">
+    <h1 style="font-size:32px;line-height:1.05;letter-spacing:-.03em;margin:0 0 8px">Tell us about your hair.</h1>
+    <p style="margin:0;color:var(--pn-muted);font-size:16px;text-wrap:pretty">So we show the right barbers first. All optional. Change it any time in Profile.</p>
+    <h6 style="margin:24px 0 10px;color:var(--pn-muted)">Cuts for</h6>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ prefFor }}" as="o" hint-placeholder-count="4"><label class="seg-opt" style="min-height:44px;padding:0 16px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="radio" name="{{ nm.pfor }}" checked="{{ o.on }}" onChange="{{ o.pick }}">{{ o.n }}</label></sc-for>
+    </div>
+    <h6 style="margin:24px 0 10px;color:var(--pn-muted)">Hair type</h6>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <sc-for list="{{ hairTypes }}" as="o" hint-placeholder-count="6"><label class="seg-opt" style="min-height:60px;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;padding:0 14px;border:1px solid var(--color-divider);border-radius:12px;line-height:1.25"><input type="radio" name="{{ nm.htype }}" checked="{{ o.on }}" onChange="{{ o.pick }}"><span style="font-weight:600;font-size:16px">{{ o.n }}</span><span style="font-size:13px;opacity:.7">{{ o.sub }}</span></label></sc-for>
+    </div>
+    <h6 style="margin:24px 0 10px;color:var(--pn-muted)">Looking for specialists in</h6>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ specChips }}" as="o" hint-placeholder-count="5"><label class="seg-opt" style="min-height:44px;padding:0 16px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="checkbox" checked="{{ o.on }}" onChange="{{ o.pick }}">{{ o.n }}</label></sc-for>
+    </div>
+    <h6 style="margin:24px 0 10px;color:var(--pn-muted)">Styles you're into</h6>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ styleChips }}" as="o" hint-placeholder-count="8"><label class="seg-opt" style="min-height:44px;padding:0 16px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="checkbox" checked="{{ o.on }}" onChange="{{ o.pick }}">{{ o.n }}</label></sc-for>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;margin-top:20px;font-size:14px;color:var(--pn-muted)">{{ icS.shield }}<span>Only used to sort results. Shops never see it.</span></div>
+  </div>
+  <div style="padding:12px 20px 44px;border-top:1px solid var(--color-divider)"><button class="btn btn-primary" onClick="{{ go.onb3 }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Continue{{ ic.arrow }}</button></div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 3 -->
+<sc-if value="{{ is.onb3 }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column">
+  <div style="padding:8px 8px 0;display:flex;align-items:center"><button class="btn btn-icon" onClick="{{ go.onbHair }}" aria-label="Back" style="width:48px;height:48px">{{ ic.back }}</button></div>
+  <div style="padding:8px 20px 0;display:flex;gap:6px"><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span><span style="flex:1;height:4px;background:var(--color-accent)"></span></div>
+  <div style="padding:28px 20px 0"><h1 style="font-size:36px;line-height:1.02;letter-spacing:-.03em;margin:0 0 10px">Skip the waiting room.</h1><p style="margin:0;color:var(--pn-muted);font-size:17px;text-wrap:pretty">Join a queue from the street. We send one push when you are next, so you can grab a coffee instead of sitting on a bench.</p></div>
+  <div style="flex:1;padding:28px 20px 0;display:flex;flex-direction:column;gap:10px">
+    <div style="background:var(--color-surface);padding:14px;display:flex;gap:12px;box-shadow:var(--shadow-md)"><span style="width:40px;height:40px;flex:none;background:var(--color-accent-600);color:#fff;display:grid;place-items:center">{{ ic.scissors }}</span><span style="display:flex;flex-direction:column;line-height:1.3"><span style="font-size:13px;color:var(--pn-muted)">project-next · now</span><span style="font-weight:700">You're next at Kings Cuts</span><span style="font-size:15px">Murat is ready in about 5 min.</span></span></div>
+    <div style="background:var(--color-surface);padding:14px;display:flex;gap:12px;opacity:.6"><span style="width:40px;height:40px;flex:none;border:1px solid var(--color-strong);border-radius:12px;display:grid;place-items:center">{{ ic.cal }}</span><span style="display:flex;flex-direction:column;line-height:1.3"><span style="font-size:13px;color:var(--pn-muted)">project-next · tomorrow 12:30</span><span style="font-weight:700">Fade + beard in 2 hours</span></span></div>
+    <p style="font-size:14px;color:var(--pn-muted);margin:8px 0 0">Only queue and booking updates. No ads.</p>
+  </div>
+  <div style="padding:20px 20px 44px;display:flex;flex-direction:column;gap:8px">
+    <button class="btn btn-primary" onClick="{{ go.login }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Allow notifications{{ ic.bell }}</button>
+    <button class="btn btn-ghost" onClick="{{ go.login }}" style="width:100%;min-height:48px;font-size:16px;justify-content:flex-start;padding:0 20px;color:var(--color-text)">Not now</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- LOGIN -->
+<sc-if value="{{ is.login }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;padding:0 20px">
+  <div style="padding:20px 0 0;font-weight:700;font-size:18px">project-next</div>
+  <div style="padding:48px 0 0"><h1 style="font-size:40px;line-height:1;letter-spacing:-.03em;margin:0 0 12px">Sign in to book and queue.</h1></div>
+  <div style="display:flex;flex-direction:column;gap:10px;padding-top:28px">
+    <button class="btn" onClick="{{ go.home }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:flex-start;background:var(--color-text);color:var(--color-bg)">Continue with Apple</button>
+    <button class="btn btn-secondary" onClick="{{ go.home }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:flex-start;border:1px solid var(--color-strong);border-radius:12px">Continue with Google</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:24px 0;font-size:14px;color:var(--pn-muted)"><span style="flex:1;height:2px;background:var(--color-divider)"></span>or with email<span style="flex:1;height:2px;background:var(--color-divider)"></span></div>
+  <div class="field"><label style="font-size:14px;color:var(--pn-muted)">Email</label><input class="input" type="email" placeholder="name@mail.de" style="min-height:56px;font-size:17px;padding:0 14px"></div>
+  <button class="btn btn-primary" onClick="{{ go.home }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between;margin-top:12px">Send me a sign-in link{{ ic.mail }}</button>
+  <div style="flex:1"></div>
+  <div style="display:flex;gap:10px;align-items:flex-start;padding:16px 0 44px;border-top:1px solid var(--color-divider);font-size:15px"><span style="color:var(--pn-accent-text)">{{ ic.shield }}</span><span>No phone number needed. Providers only ever see your display name.</span></div>
+</div>
+</sc-if>
+
+<!-- HOME / SEARCH + MAP + STATES share header -->
+<sc-if value="{{ isDiscover }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;padding:4px 20px 0">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <button class="btn" style="min-height:44px;padding:0;gap:6px;font-size:20px;letter-spacing:-.02em"><span style="color:var(--pn-accent-text)">{{ ic.pin }}</span>Berlin, Neukölln{{ ic.down }}</button>
+    <button class="btn btn-icon" aria-label="Notifications" style="width:44px;height:44px">{{ ic.bell }}</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:8px">
+    <label style="flex:1;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 14px;background:var(--color-surface);border:1px solid var(--color-strong);border-radius:12px"><span>{{ ic.search }}</span><input placeholder="Barber, style or street" style="flex:1;min-width:0;background:none;border:0;color:inherit;font:inherit;font-size:17px;outline:none"></label>
+    <button class="btn btn-secondary" aria-label="Filters" style="width:52px;height:52px;padding:0;border:1px solid var(--color-strong);border-radius:12px">{{ ic.sliders }}</button>
+  </div>
+</div>
+<div style="flex:none;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 20px 12px">
+  <sc-for list="{{ chips }}" as="f" hint-placeholder-count="6">
+    <label class="seg-opt" style="flex:none;min-height:40px;padding:0 14px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px;white-space:nowrap">
+      <input type="checkbox" checked="{{ f.on }}" onChange="{{ f.pick }}">{{ f.n }}
+    </label>
+  </sc-for>
+</div>
+<div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px 10px;border-bottom:1px solid var(--color-divider)">
+  <span style="font-size:14px;font-weight:600">{{ resultCount }}</span>
+  <div class="seg" style="">
+    <label class="seg-opt" style="min-height:40px;font-size:14px;font-weight:600"><input type="radio" name="{{ nm.view }}" checked="{{ viewList }}" onChange="{{ go.home }}">{{ ic.list }}List</label>
+    <label class="seg-opt" style="min-height:40px;font-size:14px;font-weight:600"><input type="radio" name="{{ nm.view }}" checked="{{ is.map }}" onChange="{{ go.map }}">{{ ic.map }}Map</label>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.home }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:16px 20px 0">
+  <sc-for list="{{ results }}" as="r" hint-placeholder-count="2">
+    <div style="padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--color-divider)">
+      <button onClick="{{ go.profile }}" style="display:block;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer">
+        <div style="height:196px;position:relative;display:flex;align-items:flex-end;padding:10px">
+          <span class="ph" style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px)"></span>
+          <span style="position:relative;font:600 11px/1 ui-monospace,monospace;background:var(--color-bg);padding:5px 7px">PHOTO · {{ r.photo }}</span>
+          <span style="position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:7px;min-height:30px;padding:0 10px;border-radius:999px;background:var(--color-bg);font-size:14px;font-weight:700">
+            <sc-if value="{{ r.hasQueue }}" hint-placeholder-val="{{ true }}"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent)"></span></sc-if>{{ r.queue }}
+          </span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-top:12px">
+          <span style="font-weight:700;font-size:21px;line-height:1.15;letter-spacing:-.02em">{{ r.name }}</span>
+          <span style="display:flex;align-items:center;gap:4px;font-weight:700;font-size:16px;flex:none"><span style="color:var(--pn-accent-text)">{{ icS.starF }}</span>{{ r.rating }}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <sc-for list="{{ r.tags }}" as="tg" hint-placeholder-count="2"><span class="tag tag-neutral" style="font-size:13px;padding:4px 8px">{{ tg }}</span></sc-for>
+        </div>
+        <div style="display:flex;gap:14px;margin-top:10px;font-size:15px;color:var(--pn-muted)"><span>{{ r.dist }}</span><span>{{ r.reviews }} reviews</span><span style="margin-left:auto;color:var(--color-text);font-weight:700">{{ r.from }}</span></div>
+      </button>
+    </div>
+  </sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.map }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;position:relative;background:var(--color-surface);overflow:hidden">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 46%,var(--color-bg) 46% 49%,transparent 49%),linear-gradient(0deg,transparent 0 30%,var(--color-bg) 30% 32%,transparent 32% 70%,var(--color-bg) 70% 71.5%,transparent 71.5%),linear-gradient(28deg,transparent 0 60%,var(--color-bg) 60% 62%,transparent 62%)"></div>
+  <span style="position:absolute;top:62px;left:206px;font:600 11px/1 ui-monospace,monospace;color:var(--pn-muted);transform:rotate(-62deg)">SONNENALLEE</span>
+  <span style="position:absolute;top:150px;left:150px;display:flex;align-items:center;gap:6px;height:36px;padding:0 10px;background:var(--color-accent-600);color:#fff;font-weight:700;font-size:15px;box-shadow:var(--shadow-md);border-radius:999px">{{ icS.scissors }}8 € · 3 wait</span>
+  <span style="position:absolute;top:60px;left:40px;display:flex;align-items:center;height:32px;padding:0 10px;background:var(--color-bg);border-radius:999px;border:1px solid var(--color-strong);border-radius:12px;font-weight:700;font-size:14px">12 €</span>
+  <span style="position:absolute;top:250px;left:250px;display:flex;align-items:center;height:32px;padding:0 10px;background:var(--color-bg);border-radius:999px;border:1px solid var(--color-strong);border-radius:12px;font-weight:700;font-size:14px">25 €</span>
+  <span style="position:absolute;top:300px;left:56px;display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;background:var(--color-bg);border-radius:999px;border:1.5px dashed var(--color-strong);border-radius:12px;font-weight:700;font-size:14px">{{ icS.home }}60 €</span>
+  <span style="position:absolute;top:216px;left:110px;width:18px;height:18px;border-radius:50%;background:#2f7bff;border:3px solid #fff;box-shadow:0 0 0 8px #2f7bff33" aria-label="You"></span>
+  <button onClick="{{ go.profile }}" style="position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:12px;padding:10px;background:var(--color-bg);border:1px solid var(--color-strong);border-radius:12px;color:inherit;font:inherit;text-align:left;cursor:pointer;box-shadow:var(--shadow-lg)">
+    <span class="ph" style="width:84px;height:84px;flex:none;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 10px,var(--pn-ph2) 10px 20px)"></span>
+    <span style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0"><span style="font-weight:700;font-size:18px;line-height:1.15">Kings Cuts Neukölln</span><span style="font-size:14px;color:var(--pn-muted)">Turkish barber · 4.8 ★ · 0.6 km</span><span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;margin-top:4px"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent)"></span>3 waiting · ~35 min</span></span>
+    <span style="align-self:center">{{ ic.right }}</span>
+  </button>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.loadSearch }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;overflow:hidden;padding:16px 20px 0" aria-busy="true">
+  <p style="font-size:14px;font-weight:600;color:var(--pn-muted);margin:0 0 12px">Finding barbers near Neukölln…</p>
+  <div style="height:196px;background:var(--color-surface)"></div>
+  <div style="height:22px;width:62%;background:var(--color-surface);margin-top:14px"></div>
+  <div style="display:flex;gap:6px;margin-top:10px"><span style="height:24px;width:90px;background:var(--color-surface)"></span><span style="height:24px;width:60px;background:var(--color-surface)"></span></div>
+  <div style="height:2px;background:var(--color-divider);margin:20px 0"></div>
+  <div style="height:196px;background:var(--color-surface)"></div>
+  <div style="height:22px;width:48%;background:var(--color-surface);margin-top:14px"></div>
+  
+</div>
+</sc-if>
+
+<sc-if value="{{ is.emptySearch }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;padding:40px 20px 0;display:flex;flex-direction:column;gap:14px">
+  <span style="color:var(--pn-accent-text)">{{ icL.scissors }}</span>
+  <h2 style="font-size:28px;line-height:1.08;letter-spacing:-.02em;margin:0">Nobody with braids is open right now in Neukölln.</h2>
+  <p style="margin:0;color:var(--pn-muted);font-size:16px">Try one of these instead:</p>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <button class="btn btn-secondary" style="width:100%;min-height:52px;justify-content:space-between;padding:0 16px;font-size:16px;border:1px solid var(--color-strong);border-radius:12px">Turn off "Open now"{{ ic.x }}</button>
+    <button class="btn btn-secondary" style="width:100%;min-height:52px;justify-content:space-between;padding:0 16px;font-size:16px;border:1px solid var(--color-strong);border-radius:12px">Show stylists who come to you{{ ic.home }}</button>
+    <button class="btn btn-secondary" style="width:100%;min-height:52px;justify-content:space-between;padding:0 16px;font-size:16px;border:1px solid var(--color-strong);border-radius:12px">Search all of Berlin{{ ic.globe }}</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- PROFILE -->
+<sc-if value="{{ is.profile }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding-bottom:120px">
+  <div class="ph" style="height:248px;position:relative;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px);display:flex;align-items:flex-end;padding:12px 20px">
+    <span style="font:600 11px/1 ui-monospace,monospace;background:var(--color-bg);padding:5px 7px">COVER · shop interior, chairs</span>
+    <button class="btn btn-icon" onClick="{{ go.home }}" aria-label="Back" style="position:absolute;top:8px;left:12px;width:44px;height:44px;background:var(--color-bg)">{{ ic.back }}</button>
+    <button class="btn btn-icon" aria-label="Save to favourites" style="position:absolute;top:8px;right:12px;width:44px;height:44px;background:var(--color-bg)">{{ ic.heart }}</button>
+  </div>
+  <div style="padding:18px 20px 0">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pn-accent-text)">{{ icS.verified }}Verified provider</span>
+    <h1 style="font-size:34px;line-height:1.02;letter-spacing:-.03em;margin:8px 0 8px">Kings Cuts Neukölln</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-neutral" style="font-size:13px;padding:4px 8px">Turkish barber</span><span class="tag tag-neutral" style="font-size:13px;padding:4px 8px">Fade</span><span class="tag tag-neutral" style="font-size:13px;padding:4px 8px">Beard</span></div>
+  </div>
+  <div style="margin:18px 20px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--color-divider)"><span style="color:var(--pn-accent-text)">{{ ic.starF }}</span><span style="font-weight:700">4.8</span><span style="color:var(--pn-muted)">132 reviews</span><span style="margin-left:auto">{{ ic.right }}</span></div>
+    <div style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--color-divider)"><span>{{ ic.pin }}</span><span>Sonnenallee 112</span><span style="color:var(--pn-muted)">0.6 km · 8 min walk</span></div>
+    <div style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--color-divider)"><span>{{ ic.clock }}</span><span style="font-weight:700">Open now</span><span style="color:var(--pn-muted)">Mo–Sa 09:00–20:00</span><span style="margin-left:auto">{{ ic.down }}</span></div>
+    <div style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--color-divider)"><span>{{ ic.cash }}</span><span>Cash at the shop</span><span style="color:var(--pn-muted)">· card on site</span></div>
+  </div>
+  <div style="display:flex;gap:0;margin:20px 20px 0;border-bottom:1px solid var(--color-divider);font-weight:700;font-size:15px">
+    <span style="padding:10px 14px 10px 0;border-bottom:3px solid var(--color-accent);margin-bottom:-2px">Work</span><span style="padding:10px 14px;color:var(--pn-muted)">Services</span><span style="padding:10px 14px;color:var(--pn-muted)">Stylists</span><span style="padding:10px 14px;color:var(--pn-muted)">Reviews</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:12px 20px 0">
+    <sc-for list="{{ portfolio }}" as="p" hint-placeholder-count="6">
+      <div class="ph" style="aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 10px,var(--pn-ph2) 10px 20px);display:flex;align-items:flex-end;padding:5px"><span style="font-size:11px;font-weight:700;background:var(--color-bg);padding:2px 5px">{{ p }}</span></div>
+    </sc-for>
+  </div>
+  <h6 style="margin:28px 20px 4px;color:var(--pn-muted);font-size:13px">Services</h6>
+  <div style="margin:0 20px;border-top:1px solid var(--color-divider)">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;min-height:60px;border-bottom:1px solid var(--color-divider);gap:12px"><span style="flex:1;display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:700;font-size:17px">{{ s.n }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ s.d }}</span></span><span style="font-weight:700;font-size:17px">{{ s.p }}</span></div>
+    </sc-for>
+  </div>
+  <h6 style="margin:28px 20px 10px;color:var(--pn-muted);font-size:13px">Stylists</h6>
+  <div style="display:flex;gap:12px;margin:0 20px">
+    <sc-for list="{{ stylistsOnly }}" as="st" hint-placeholder-count="2">
+      <div style="flex:1;display:flex;gap:10px;align-items:center"><span class="ph" style="width:52px;height:52px;flex:none;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 8px,var(--pn-ph2) 8px 16px)"></span><span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:700">{{ st.n }}</span><span style="font-size:13px;color:var(--pn-muted)">{{ st.sub }}</span></span></div>
+    </sc-for>
+  </div>
+  <h6 style="margin:28px 20px 10px;color:var(--pn-muted);font-size:13px">Reviews</h6>
+  <div style="margin:0 20px;padding:14px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:3px;color:var(--pn-accent-text)" aria-label="5 of 5 stars">{{ icS.starF }}{{ icS.starF }}{{ icS.starF }}{{ icS.starF }}{{ icS.starF }}</div>
+    <p style="margin:8px 0 4px;font-size:16px;text-wrap:pretty">Cleanest skin fade I've had in Berlin. Murat takes his time with the beard line.</p>
+    <span style="font-size:14px;color:var(--pn-muted)">Emre · Fade + beard · Sa 04.10.</span>
+  </div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 20px 34px;background:var(--color-bg);border-top:1px solid var(--color-divider)">
+  <button class="btn btn-secondary" onClick="{{ go.qJoin }}" style="min-height:60px;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:0 16px;border:1px solid var(--color-strong);border-radius:12px;font-size:17px">Join queue<span style="font-size:13px;font-weight:600;color:var(--pn-muted)">3 waiting · ~35 min</span></button>
+  <button class="btn btn-primary" onClick="{{ go.bSvc }}" style="min-height:60px;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:0 16px;font-size:17px">Book<span style="font-size:13px;font-weight:600">Next free: today 16:00</span></button>
+</div>
+</sc-if>
+
+<!-- BOOKING SHEETS -->
+<sc-if value="{{ isSheet }}" hint-placeholder-val="{{ false }}">
+<div class="ph" style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px)"></div>
+<div style="position:absolute;inset:0;background:#000a"></div>
+<div style="position:absolute;left:0;right:0;top:56px;bottom:0;display:flex;flex-direction:column;background:var(--color-bg);border-radius:22px 22px 0 0;box-shadow:var(--shadow-lg)">
+  <div style="display:flex;justify-content:center;padding:8px 0 0"><span style="width:40px;height:4px;background:var(--color-divider)"></span></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 0 20px">
+    <span style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pn-muted)">{{ sheet.kicker }}</span>
+    <button class="btn btn-icon" onClick="{{ go.profile }}" aria-label="Close" style="width:48px;height:48px">{{ ic.x }}</button>
+  </div>
+  <div style="display:flex;gap:4px;padding:0 20px">
+    <sc-for list="{{ sheet.steps }}" as="seg" hint-placeholder-count="5"><span style="flex:1;height:4px;background:{{ seg.c }}"></span></sc-for>
+  </div>
+  <h2 style="font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:18px 20px 4px">{{ sheet.title }}</h2>
+  <p style="margin:0 20px;font-size:15px;color:var(--pn-muted)">{{ sheet.sub }}</p>
+  <div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:14px 20px 0">
+
+    <sc-if value="{{ is.bSvc }}" hint-placeholder-val="{{ false }}">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+        <label class="radio" style="display:flex;width:100%;min-height:68px;gap:14px;border-bottom:1px solid var(--color-divider);font-size:17px">
+          <input type="radio" name="{{ nm.svc }}" checked="{{ s.on }}" onChange="{{ s.pick }}"><span class="dot" style="width:22px;height:22px"></span>
+          <span style="flex:1;display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:700">{{ s.n }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ s.d }}</span></span><span style="font-weight:700">{{ s.p }}</span>
+        </label>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ is.qJoin }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--color-strong);border-radius:12px;margin-bottom:16px">
+        <div style="padding:12px 14px;border-right:2px solid var(--color-text)"><div style="font-size:13px;color:var(--pn-muted)">You would be</div><div style="font-size:34px;font-weight:700;line-height:1.1">3rd</div></div>
+        <div style="padding:12px 14px"><div style="font-size:13px;color:var(--pn-muted)">Estimated wait</div><div style="font-size:34px;font-weight:700;line-height:1.1">~25 min</div></div>
+      </div>
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+        <label class="radio" style="display:flex;width:100%;min-height:60px;gap:14px;border-bottom:1px solid var(--color-divider);font-size:17px">
+          <input type="radio" name="{{ nm.qsvc }}" checked="{{ s.on }}" onChange="{{ s.pick }}"><span class="dot" style="width:22px;height:22px"></span>
+          <span style="flex:1;font-weight:700">{{ s.n }}</span><span style="font-weight:700">{{ s.p }}</span>
+        </label>
+      </sc-for>
+      <div style="display:flex;gap:10px;align-items:flex-start;padding:14px 0;font-size:15px"><span>{{ ic.cash }}</span><span>Pay cash at the shop. No phone number shared. Stay within 15 min walk; we push when you are next.</span></div>
+    </sc-if>
+
+    <sc-if value="{{ is.bSty }}" hint-placeholder-val="{{ false }}">
+      <sc-for list="{{ stylists }}" as="st" hint-placeholder-count="3">
+        <label class="radio" style="display:flex;width:100%;min-height:76px;gap:14px;border-bottom:1px solid var(--color-divider);font-size:17px">
+          <input type="radio" name="{{ nm.sty }}" checked="{{ st.on }}" onChange="{{ st.pick }}"><span class="dot" style="width:22px;height:22px"></span>
+          <span class="ph" style="width:48px;height:48px;flex:none;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 8px,var(--pn-ph2) 8px 16px)"></span>
+          <span style="flex:1;display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:700">{{ st.n }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ st.sub }}</span></span>
+        </label>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ is.bTime }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--color-divider);border-radius:12px">
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+          <label class="seg-opt" style="min-height:64px;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;padding:0 8px;font-size:13px;line-height:1.2;opacity:{{ d.op }}">
+            <input type="radio" name="{{ nm.day }}" checked="{{ d.on }}" onChange="{{ d.pick }}" disabled="{{ d.closed }}"><span style="font-weight:700;font-size:16px">{{ d.w }}</span><span>{{ d.d }}</span>
+          </label>
+        </sc-for>
+      </div>
+      <h6 style="margin:20px 0 8px;font-size:13px;color:var(--pn-muted)">Fr 10.10. · 8 free</h6>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <sc-for list="{{ slots }}" as="t" hint-placeholder-count="12">
+          <label class="seg-opt" style="min-height:52px;padding:0 12px;font-size:17px;font-weight:700;border:1px solid var(--color-divider);border-radius:12px;text-decoration:{{ t.deco }};opacity:{{ t.op }}">
+            <input type="radio" name="{{ nm.slot }}" checked="{{ t.on }}" onChange="{{ t.pick }}" disabled="{{ t.taken }}">{{ t.t }}
+          </label>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;color:var(--pn-muted);margin:12px 0 0">Crossed out = taken. Times are for Fade + beard (45 min).</p>
+    </sc-if>
+
+    <sc-if value="{{ is.bNote }}" hint-placeholder-val="{{ false }}">
+      <div class="field"><label style="font-size:14px;color:var(--pn-muted)">Note to the shop (optional)</label><textarea class="input" placeholder="e.g. Skin fade, keep length on top. First time here." style="min-height:132px;font-size:17px;padding:12px 14px"></textarea></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+        <button class="btn btn-secondary" style="min-height:44px;font-size:15px;border:1px solid var(--color-divider);border-radius:12px">First visit</button>
+        <button class="btn btn-secondary" style="min-height:44px;font-size:15px;border:1px solid var(--color-divider);border-radius:12px">Bringing a reference photo</button>
+        <button class="btn btn-secondary" style="min-height:44px;font-size:15px;border:1px solid var(--color-divider);border-radius:12px">Running from work, may be 5 min late</button>
+      </div>
+      <p style="font-size:14px;color:var(--pn-muted);margin:14px 0 0">The shop sees this note and your display name. Nothing else.</p>
+    </sc-if>
+
+    <sc-if value="{{ is.bReview }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--color-divider)">
+        <sc-for list="{{ summary }}" as="row" hint-placeholder-count="5">
+          <div style="display:flex;gap:12px;min-height:52px;align-items:center;border-bottom:1px solid var(--color-divider)"><span style="width:84px;flex:none;font-size:14px;color:var(--pn-muted)">{{ row.k }}</span><span style="flex:1;font-weight:700">{{ row.v }}</span><button class="btn btn-ghost" style="min-height:44px;font-size:14px;color:var(--pn-accent-text)">Change</button></div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:14px;background:var(--color-surface);border:1px solid var(--color-strong);border-radius:12px">
+        <span>{{ icL.cash }}</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:18px">Pay cash at the shop.</span><span style="font-size:15px">No phone number shared. Free to cancel until 2 h before.</span></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px"><span style="font-size:15px;color:var(--pn-muted)">To pay on site</span><span style="font-size:32px;font-weight:700">20 €</span></div>
+    </sc-if>
+  </div>
+  <div style="padding:12px 20px 34px;border-top:1px solid var(--color-divider)">
+    <button class="btn btn-primary" onClick="{{ sheet.next }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">{{ sheet.cta }}{{ ic.arrow }}</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- BOOKING CONFIRMATION -->
+<sc-if value="{{ is.bDone }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;padding:0 20px">
+  <div style="padding-top:40px;color:var(--pn-accent-text)">{{ icXL.check }}</div>
+  <h1 style="font-size:56px;line-height:.95;letter-spacing:-.04em;margin:16px 0 8px">Booked.</h1>
+  <p style="font-size:18px;margin:0;color:var(--pn-muted)">Kings Cuts has your slot. We remind you 2 h before.</p>
+  <div style="margin-top:28px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);padding:16px 0;display:flex;flex-direction:column;gap:6px">
+    <span style="font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1">Fr 10.10. · 14:30</span>
+    <span style="font-size:17px;font-weight:700">Fade + beard · Any stylist · 45 min</span>
+    <span style="font-size:16px;color:var(--pn-muted)">Kings Cuts Neukölln · Sonnenallee 112</span>
+    <span style="display:flex;align-items:center;gap:8px;font-size:15px;margin-top:6px">{{ icS.cash }}20 € cash at the shop</span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:20px">
+    <button class="btn btn-secondary" style="width:100%;min-height:56px;justify-content:space-between;padding:0 20px;font-size:17px;border:1px solid var(--color-strong);border-radius:12px">Add to calendar{{ ic.cal }}</button>
+    <button class="btn btn-secondary" style="width:100%;min-height:56px;justify-content:space-between;padding:0 20px;font-size:17px;border:1px solid var(--color-strong);border-radius:12px">Directions · 8 min walk{{ ic.nav }}</button>
+  </div>
+  <div style="flex:1"></div>
+  <div style="padding:16px 0 44px"><button class="btn btn-primary" onClick="{{ go.bookings }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">See my bookings{{ ic.arrow }}</button></div>
+</div>
+</sc-if>
+
+<!-- QUEUE STATUS -->
+<sc-if value="{{ isQueue }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;background:{{ q.bg }};color:{{ q.fg }}">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 20px 0">
+    <span style="display:flex;flex-direction:column;line-height:1.2"><span style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Queue · live</span><span style="font-weight:700;font-size:18px">Kings Cuts Neukölln</span></span>
+    <span style="display:flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;border:1px solid currentColor;border-radius:999px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">{{ icS.live }}{{ q.pill }}</span>
+  </div>
+  <div style="padding:8px 20px 0;flex:1;display:flex;flex-direction:column">
+    <span style="font-size:15px;font-weight:700;margin-top:12px">{{ q.kicker }}</span>
+    <span style="font-size:{{ q.size }};font-weight:700;line-height:.82;letter-spacing:-.06em;margin:6px 0 0 -6px">{{ q.big }}</span>
+    <span style="font-size:22px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-top:14px;text-wrap:balance">{{ q.line }}</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;margin-top:22px;border-top:1px solid currentColor;border-bottom:1px solid currentColor">
+      <div style="padding:12px 12px 12px 0;border-right:1px solid currentColor"><div style="font-size:13px;font-weight:600">{{ q.aK }}</div><div style="font-size:30px;font-weight:700;line-height:1.1">{{ q.aV }}</div></div>
+      <div style="padding:12px 0 12px 12px"><div style="font-size:13px;font-weight:600">{{ q.bK }}</div><div style="font-size:30px;font-weight:700;line-height:1.1">{{ q.bV }}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:18px">
+      <sc-for list="{{ q.track }}" as="tr" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="height:6px;background:currentColor;opacity:{{ tr.op }}"></span><span style="font-size:13px;font-weight:{{ tr.w }};display:flex;align-items:center;gap:4px">{{ tr.mark }}{{ tr.n }}</span></div>
+      </sc-for>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:18px;font-size:15px">{{ ic.walk }}<span>Sonnenallee 112 · 8 min walk</span></div>
+  </div>
+  <div style="padding:12px 20px 0;display:flex;gap:8px">
+    <button class="btn" onClick="{{ q.cycle }}" style="flex:1;min-height:56px;justify-content:space-between;padding:0 16px;font-size:16px;border:1px solid currentColor;border-radius:12px;color:inherit">Directions{{ ic.nav }}</button>
+    <button class="btn" onClick="{{ go.home }}" style="flex:1;min-height:56px;justify-content:space-between;padding:0 16px;font-size:16px;color:inherit;border:2px solid transparent;text-decoration:underline;text-underline-offset:4px">Leave queue{{ ic.x }}</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.errQueue }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;padding:4px 20px 0">
+  <span style="font-weight:700;font-size:18px">Kings Cuts Neukölln</span>
+  <div style="margin-top:16px;display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--color-strong);border-radius:12px;background:var(--color-surface)"><span>{{ ic.offline }}</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700">No live update since 14:31</span><span style="font-size:15px;color:var(--pn-muted)">You are offline. Your place is kept by the shop.</span></span></div>
+  <span style="font-size:15px;font-weight:700;margin-top:24px;color:var(--pn-muted)">Last known place</span>
+  <span style="font-size:200px;font-weight:700;line-height:.82;letter-spacing:-.06em;margin:6px 0 0 -6px;color:var(--pn-muted)">3</span>
+  <span style="font-size:18px;margin-top:14px;color:var(--pn-muted)">Your turn was around 14:40.</span>
+  <div style="flex:1"></div>
+  <div style="padding:16px 0 16px"><button class="btn btn-primary" onClick="{{ go.qWait }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Try again{{ ic.retry }}</button></div>
+</div>
+</sc-if>
+
+<!-- MY BOOKINGS -->
+<sc-if value="{{ is.bookings }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;padding:8px 20px 0"><h1 style="font-size:34px;letter-spacing:-.03em;margin:0 0 12px">My bookings</h1>
+  <div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)">
+    <sc-for list="{{ btabs }}" as="b" hint-placeholder-count="3"><label class="seg-opt" style="min-height:44px;font-size:15px;font-weight:700"><input type="radio" name="{{ nm.btab }}" checked="{{ b.on }}" onChange="{{ b.pick }}">{{ b.n }}</label></sc-for>
+  </div>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:16px 20px 0">
+  <sc-if value="{{ bt.up }}" hint-placeholder-val="{{ true }}">
+    <div style="border-top:1px solid var(--color-divider);padding:14px 0 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:26px;font-weight:700;letter-spacing:-.02em">Fr 10.10. · 14:30</span><span style="display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 8px;background:var(--color-text);color:var(--color-bg);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">{{ icS.check }}Confirmed</span></div>
+      <div style="font-weight:700;margin-top:4px">Kings Cuts Neukölln</div><div style="font-size:15px;color:var(--pn-muted)">Fade + beard · 45 min · 20 € cash</div>
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-secondary" style="flex:1;min-height:48px;justify-content:flex-start;font-size:15px;border:1px solid var(--color-strong);border-radius:12px">Reschedule</button><button class="btn btn-danger" style="flex:1;min-height:48px;justify-content:flex-start;font-size:15px;border:1px solid var(--pn-danger-text)">Cancel</button></div>
+    </div>
+    <div style="border-top:1px solid var(--color-divider);padding:14px 0 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:26px;font-weight:700;letter-spacing:-.02em">Sa 18.10. · 11:00</span><span style="display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 8px;border:1px solid var(--color-strong);border-radius:12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">{{ icS.clock }}Request sent</span></div>
+      <div style="font-weight:700;margin-top:4px">Ama's Braids · comes to you</div><div style="font-size:15px;color:var(--pn-muted)">Braids · ~120 min · from 60 € cash</div>
+      <p style="font-size:14px;margin:8px 0 0;color:var(--pn-muted)">Ama confirms within 24 h. You see the exact price before she starts.</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{ bt.past }}" hint-placeholder-val="{{ false }}">
+    <sc-for list="{{ past }}" as="p" hint-placeholder-count="3">
+      <div style="border-top:1px solid var(--color-divider);padding:14px 0;display:flex;flex-direction:column;gap:2px">
+        <div style="display:flex;justify-content:space-between"><span style="font-weight:700;font-size:18px">{{ p.name }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ p.date }}</span></div>
+        <span style="font-size:15px;color:var(--pn-muted)">{{ p.svc }}</span>
+        <div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-primary" onClick="{{ go.bSvc }}" style="min-height:44px;font-size:15px;padding:0 14px">{{ icS.rebook }}Rebook</button><sc-if value="{{ p.canReview }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" onClick="{{ go.review }}" style="min-height:44px;font-size:15px;border:1px solid var(--color-strong);border-radius:12px">{{ icS.star }}Write review</button></sc-if></div>
+      </div>
+    </sc-for>
+  </sc-if>
+  <sc-if value="{{ bt.fav }}" hint-placeholder-val="{{ false }}">
+    <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
+      <button onClick="{{ go.profile }}" style="display:flex;gap:12px;width:100%;align-items:center;padding:12px 0;border:0;border-top:1px solid var(--color-divider);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer"><span class="ph" style="width:64px;height:64px;flex:none;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 8px,var(--pn-ph2) 8px 16px)"></span><span style="flex:1;display:flex;flex-direction:column;line-height:1.3"><span style="font-weight:700;font-size:17px">{{ r.name }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ r.queue }}</span></span>{{ ic.right }}</button>
+    </sc-for>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.emptyBookings }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;padding:8px 20px 0">
+  <h1 style="font-size:34px;letter-spacing:-.03em;margin:0 0 32px">My bookings</h1>
+  <span style="color:var(--pn-accent-text)">{{ icL.cal }}</span>
+  <h2 style="font-size:28px;line-height:1.08;margin:14px 0 8px">No bookings yet.</h2>
+  <p style="margin:0;font-size:16px;color:var(--pn-muted)">Book a slot or join a queue and it shows up here, with a one-tap rebook for next time.</p>
+  <button class="btn btn-primary" onClick="{{ go.home }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between;margin-top:24px">Find a barber{{ ic.search }}</button>
+</div>
+</sc-if>
+
+<!-- REVIEW -->
+<sc-if value="{{ is.review }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;display:flex;align-items:center;padding:0 8px"><button class="btn btn-icon" onClick="{{ go.bookings }}" aria-label="Back" style="width:48px;height:48px">{{ ic.back }}</button></div>
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:0 20px">
+  <h1 style="font-size:34px;line-height:1.02;letter-spacing:-.03em;margin:4px 0 6px">How was your cut?</h1>
+  <p style="margin:0;font-size:15px;color:var(--pn-muted)">Kings Cuts · Fade + beard with Murat · Fr 10.10.</p>
+  <div style="display:flex;gap:4px;margin-top:22px" role="radiogroup" aria-label="Rating">
+    <sc-for list="{{ stars }}" as="s" hint-placeholder-count="5">
+      <button onClick="{{ s.pick }}" aria-label="{{ s.label }}" style="width:56px;height:56px;display:grid;place-items:center;background:none;border:1px solid var(--color-divider);border-radius:12px;color:var(--pn-accent-text);cursor:pointer">
+        <sc-if value="{{ s.on }}" hint-placeholder-val="{{ true }}">{{ icL.starF }}</sc-if><sc-if value="{{ s.off }}" hint-placeholder-val="{{ false }}"><span style="color:var(--pn-muted)">{{ icL.star }}</span></sc-if>
+      </button>
+    </sc-for>
+  </div>
+  <div style="font-weight:700;font-size:18px;margin-top:10px">{{ ratingLabel }}</div>
+  <div class="field" style="margin-top:18px"><label style="font-size:14px;color:var(--pn-muted)">What should others know?</label><textarea class="input" placeholder="Fade, timing, vibe of the shop…" style="min-height:120px;font-size:17px;padding:12px 14px"></textarea></div>
+  <button style="margin-top:12px;width:100%;min-height:96px;display:flex;align-items:center;gap:12px;padding:0 16px;background:none;border:1.5px dashed var(--color-strong);border-radius:12px;color:inherit;font:inherit;cursor:pointer;text-align:left">{{ ic.camera }}<span style="display:flex;flex-direction:column"><span style="font-weight:700">Add a photo of the result</span><span style="font-size:14px;color:var(--pn-muted)">Optional. Shown with your review.</span></span></button>
+  <p style="font-size:14px;color:var(--pn-muted);margin:14px 0 0">Only clients with a done booking can review. Your display name is shown, nothing else.</p>
+</div>
+<div style="padding:12px 20px 34px;border-top:1px solid var(--color-divider)"><button class="btn btn-primary" onClick="{{ go.bookings }}" style="width:100%;min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Post review{{ ic.arrow }}</button></div>
+</sc-if>
+
+<!-- SETTINGS -->
+<sc-if value="{{ is.settings }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding:8px 20px 20px">
+  <h1 style="font-size:34px;letter-spacing:-.03em;margin:0 0 16px">Profile</h1>
+  <div class="field"><label style="font-size:14px;color:var(--pn-muted)">Display name · what shops see</label><input class="input" value="Yusuf" style="min-height:52px;font-size:17px;padding:0 14px"></div>
+  <div style="display:flex;align-items:center;gap:12px;min-height:56px;margin-top:8px;border-bottom:1px solid var(--color-divider)">{{ ic.pin }}<span style="flex:1">Home city</span><span style="font-weight:700">Berlin</span>{{ ic.right }}</div>
+  <button onClick="{{ go.onbHair }}" style="display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:0;border:0;border-bottom:1px solid var(--color-divider);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer">{{ ic.scissors }}<span style="flex:1">Your hair</span><span style="font-weight:600;color:var(--pn-muted)">{{ hairSummary }}</span>{{ ic.right }}</button>
+  <div style="display:flex;align-items:center;gap:12px;min-height:56px;border-bottom:1px solid var(--color-divider)">{{ ic.mail }}<span style="flex:1">Sign-in</span><span style="color:var(--pn-muted)">Apple</span></div>
+  <h6 style="margin:24px 0 4px;font-size:13px;color:var(--pn-muted)">Notifications</h6>
+  <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="3">
+    <button onClick="{{ t.pick }}" role="switch" aria-checked="{{ t.on }}" style="display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:0;border:0;border-bottom:1px solid var(--color-divider);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer">
+      <span style="flex:1;display:flex;flex-direction:column;line-height:1.3"><span style="font-weight:700">{{ t.n }}</span><span style="font-size:14px;color:var(--pn-muted)">{{ t.sub }}</span></span>
+      <span style="font-size:13px;font-weight:700;width:28px">{{ t.state }}</span>
+      <span style="width:52px;height:30px;flex:none;padding:3px;display:flex;justify-content:{{ t.justify }};background:{{ t.track }};border:1px solid var(--color-strong);border-radius:999px"><span style="border-radius:50%;width:20px;height:20px;background:{{ t.knob }}"></span></span>
+    </button>
+  </sc-for>
+  <h6 style="margin:24px 0 8px;font-size:13px;color:var(--pn-muted)">Appearance</h6>
+  <div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)"><label class="seg-opt" style="min-height:44px;font-weight:700"><input type="radio" name="{{ nm.ap }}" checked="{{ true }}" onChange="{{ noop }}">Dark</label><label class="seg-opt" style="min-height:44px;font-weight:700"><input type="radio" name="{{ nm.ap }}" onChange="{{ noop }}">Light</label><label class="seg-opt" style="min-height:44px;font-weight:700"><input type="radio" name="{{ nm.ap }}" onChange="{{ noop }}">System</label></div>
+  <div style="display:flex;align-items:center;gap:12px;min-height:56px;margin-top:12px;border-bottom:1px solid var(--color-divider)">{{ ic.globe }}<span style="flex:1">Language</span><span style="font-weight:700">Deutsch</span>{{ ic.right }}</div>
+  <div style="display:flex;gap:10px;align-items:flex-start;padding:16px 0;font-size:14px;color:var(--pn-muted)">{{ icS.shield }}<span>We never ask for your phone number. Shops see your display name and booking notes only.</span></div>
+  <button class="btn btn-secondary" onClick="{{ go.login }}" style="width:100%;min-height:52px;justify-content:space-between;padding:0 16px;font-size:16px;border:1px solid var(--color-strong);border-radius:12px">Sign out{{ ic.logout }}</button>
+  <button class="btn btn-ghost" style="width:100%;min-height:52px;justify-content:space-between;padding:0 16px;font-size:16px;margin-top:8px;color:var(--pn-danger-text)">Delete account{{ ic.trash }}</button>
+</div>
+</sc-if>
+
+<!-- LOCK SCREEN: PUSH + LIVE ACTIVITY -->
+<sc-if value="{{ isLock }}" hint-placeholder-val="{{ false }}">
+<div class="ph" style="position:absolute;inset:-50px 0 0;background:repeating-linear-gradient(135deg,#1d1d21 0 16px,#141416 16px 32px)"></div>
+<div style="position:absolute;inset:-50px 0 0;background:linear-gradient(#0008,#000c)"></div>
+<div style="position:relative;flex:1;display:flex;flex-direction:column;padding:10px 12px 0;color:#fff">
+  <div style="font-size:18px;font-weight:600;padding-left:8px">Fr 10. Oktober</div>
+  <div style="font-size:96px;font-weight:700;line-height:1;letter-spacing:-.04em;padding-left:4px">14:35</div>
+  <div style="flex:1"></div>
+  <sc-if value="{{ is.push }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fafafae8;color:#0a0a0b;border-radius:22px;padding:14px;display:flex;gap:12px;margin-bottom:8px">
+      <span style="width:40px;height:40px;flex:none;border-radius:9px;background:#2f6bff;color:#fff;display:grid;place-items:center">{{ ic.scissors }}</span>
+      <span style="flex:1;display:flex;flex-direction:column;line-height:1.3"><span style="display:flex;justify-content:space-between;font-size:13px;color:#63636b"><span>PROJECT-NEXT</span><span>now</span></span><span style="font-weight:700;font-size:16px">You're next at Kings Cuts</span><span style="font-size:15px">Murat is ready in about 5 min. Sonnenallee 112, 8 min walk.</span></span>
+    </div>
+    <div style="background:#fafafab0;color:#0a0a0b;border-radius:22px;padding:12px 14px;font-size:14px;margin-bottom:120px;opacity:.8">1 more · project-next: You moved up to place 2</div>
+  </sc-if>
+  <sc-if value="{{ is.live }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#18181b;border-radius:22px;padding:16px;margin-bottom:120px;color:#fafafa">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px"><span style="width:24px;height:24px;background:#2f6bff;color:#fff;display:grid;place-items:center">{{ icS.scissors }}</span>Kings Cuts</span><span style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7aa2ff">● Live</span></div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:10px"><span style="font-size:40px;font-weight:700;line-height:1;letter-spacing:-.03em">You're next</span><span style="font-size:15px;font-weight:700;text-align:right;line-height:1.2">~5 min<br><span style="color:#a1a1aa;font-weight:600">turn at 14:40</span></span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:14px"><span style="height:6px;background:#fafafa"></span><span style="height:6px;background:#e0262b"></span><span style="height:6px;background:#fafafa4d"></span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px;font-size:12px;font-weight:700"><span>Waiting</span><span>Next</span><span style="color:#a1a1aa">Serving</span></div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{ showTabs }}" hint-placeholder-val="{{ false }}">
+<div style="height:84px;flex:none;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:repeat(4,1fr);background:var(--color-bg)">
+  <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+    <button onClick="{{ t.go }}" style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px 0 0 20px;border:0;background:none;color:{{ t.color }};font:inherit;font-size:12px;font-weight:{{ t.w }};cursor:pointer">
+      <sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-2px;left:0;right:0;height:3px;background:var(--color-accent)"></span></sc-if>{{ t.icon }}{{ t.n }}
+    </button>
+  </sc-for>
+</div>
+</sc-if>
+<span style="position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;background:{{ homeBar }};border-radius:3px;pointer-events:none"></span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;onb1&quot;,&quot;onb2&quot;,&quot;onb3&quot;,&quot;login&quot;,&quot;home&quot;,&quot;map&quot;,&quot;profile&quot;,&quot;qJoin&quot;,&quot;bSvc&quot;,&quot;bSty&quot;,&quot;bTime&quot;,&quot;bNote&quot;,&quot;bReview&quot;,&quot;bDone&quot;,&quot;qWait&quot;,&quot;qNext&quot;,&quot;qServe&quot;,&quot;push&quot;,&quot;live&quot;,&quot;bookings&quot;,&quot;review&quot;,&quot;settings&quot;,&quot;emptySearch&quot;,&quot;loadSearch&quot;,&quot;errQueue&quot;,&quot;emptyBookings&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;btab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;up&quot;,&quot;past&quot;,&quot;fav&quot;],&quot;default&quot;:&quot;up&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const SCREENS=['onb1','onb2','onbHair','onb3','login','home','map','profile','qJoin','bSvc','bSty','bTime','bNote','bReview','bDone','qWait','qNext','qServe','push','live','bookings','review','settings','emptySearch','loadSearch','errQueue','emptyBookings'];
+const LABELS={onb1:'Onboarding 1 · What it does',onb2:'Onboarding 2 · Choose city',onbHair:'Onboarding 3 · About your hair',onb3:'Onboarding 4 · Allow notifications',login:'Login',home:'Home / Search',map:'Home / Search · Map',profile:'Provider profile',qJoin:'Join queue sheet',bSvc:'Booking 1 · Service',bSty:'Booking 2 · Stylist',bTime:'Booking 3 · Day and time',bNote:'Booking 4 · Note',bReview:'Booking 5 · Review and confirm',bDone:'Booking · Confirmation',qWait:'Queue status · Waiting',qNext:"Queue status · You're next",qServe:'Queue status · Serving',push:'Push notification',live:'Lock-screen live activity',bookings:'My bookings',review:'Review',settings:'Profile and settings',emptySearch:'Search · Empty',loadSearch:'Search · Loading',errQueue:'Queue · Error',emptyBookings:'My bookings · Empty'};
+const SVC=[{n:'Fade',d:'30 min',p:'15 €'},{n:'Beard trim',d:'15 min',p:'8 €'},{n:'Fade + beard',d:'45 min',p:'20 €'},{n:'Kids cut',d:'20 min',p:'12 €'}];
+const STY=[{n:'Any stylist',sub:'Fastest free chair'},{n:'Murat',sub:'Fades, beard · 9 years'},{n:'Deniz',sub:'Scissor cuts, kids'}];
+const DAYS=[{w:'Mi',d:'08.10.'},{w:'Do',d:'09.10.'},{w:'Fr',d:'10.10.'},{w:'Sa',d:'11.10.'},{w:'So',d:'closed',closed:true}];
+const SLOTS=['10:00','10:45','11:30','12:15','13:00','13:45','14:30','15:15','16:00','16:45','17:30','18:15'];
+const TAKEN=['10:45','12:15','13:45','16:00'];
+const CHIPS=['Open now','Comes to you','African hair','Turkish barber','Braids','Locs','Extensions','Beard',"Women's","Men's",'Kids','Under 20 €'];
+const RESULTS=[
+ {name:'Kings Cuts Neukölln',tags:['Turkish barber','Fade','Beard'],rating:'4.8',reviews:132,dist:'0.6 km',from:'from 8 €',queue:'3 waiting · ~35 min',hasQueue:true,photo:'skin fade'},
+ {name:"Ama's Braids",tags:['Braids','Locs','Comes to you'],rating:'4.9',reviews:58,dist:'mobile · 10 km',from:'from 60 €',queue:'Bookings only',hasQueue:false,photo:'box braids'},
+ {name:'Afro Lounge',tags:['African hair','Kids'],rating:'4.7',reviews:91,dist:'1.4 km',from:'from 12 €',queue:'1 waiting · ~10 min',hasQueue:true,photo:'kids cut, part line'},
+ {name:'Salon Nadia',tags:["Women's",'Extensions','Colour'],rating:'4.6',reviews:47,dist:'2.1 km',from:'from 30 €',queue:'Bookings only',hasQueue:false,photo:'extensions, long'}];
+const RATE=['','Not good','Could be better','OK','Good','Great'];
+class Component extends DCLogic {
+  state={screen:(this.props&&this.props.screen)||'onb1',svc:2,sty:0,day:2,slot:'14:30',rating:5,btab:(this.props&&this.props.btab)||'up',city:0,chips:{0:true},pfor:0,htype:3,spec:{0:true},sty2:{0:true,2:true},tg:{queue:true,remind:true,offers:false}};
+  componentDidMount(){ if(!window.pnIcons){ this.t=setInterval(()=>{ if(window.pnIcons){clearInterval(this.t);this.forceUpdate();}},60);} }
+  componentWillUnmount(){ clearInterval(this.t); }
+  componentDidUpdate(p){ if(p.screen!==this.props.screen&&this.props.screen) this.setState({screen:this.props.screen}); }
+  renderVals(){
+    const s=this.state, set=o=>this.setState(o);
+    const mk=(n,w)=>window.pnIcons?window.pnIcons(React,n,w):new Proxy({},{get:()=>'',has:()=>true});
+    const ic=mk(22), icS=mk(16,2.25), icL=mk(40,2), icXL=mk(72,2.5);
+    const go={}, is={}; SCREENS.forEach(k=>{go[k]=()=>set({screen:k}); is[k]=s.screen===k;});
+    const sc=s.screen;
+    const isSheet=['qJoin','bSvc','bSty','bTime','bNote','bReview'].includes(sc);
+    const isQueue=['qWait','qNext','qServe'].includes(sc);
+    const isDiscover=['home','map','emptySearch','loadSearch'].includes(sc);
+    const isLock=sc==='push'||sc==='live';
+    const tabOf={home:0,map:0,emptySearch:0,loadSearch:0,profile:0,qWait:1,qNext:1,qServe:1,errQueue:1,bookings:2,emptyBookings:2,review:2,settings:3};
+    const showTabs=tabOf[sc]!==undefined&&sc!=='profile'&&sc!=='review';
+    const tabT=[['Discover','search','home'],['Queue','users','qWait'],['Bookings','cal','bookings'],['Profile','user','settings']];
+    const tabs=tabT.map(([n,i,g],k)=>{const on=tabOf[sc]===k;return {n,icon:ic[i],go:go[g],on,color:on?'var(--pn-accent-text)':'var(--color-text)',w:on?800:600};});
+    const steps=['bSvc','bSty','bTime','bNote','bReview'], si=steps.indexOf(sc);
+    const svc=SVC[s.svc], sty=STY[s.sty], day=DAYS[s.day];
+    const SH={
+      qJoin:{kicker:'Join queue · Kings Cuts',title:'Join the walk-in queue',sub:'Pick what you want so the shop can plan the chair.',cta:'Join queue · 3rd in line',next:go.qWait},
+      bSvc:{title:'Choose a service',sub:'Prices are set by the shop.',cta:'Continue',next:go.bSty},
+      bSty:{title:'Who cuts?',sub:'Optional. Any stylist shows the most times.',cta:'Continue',next:go.bTime},
+      bTime:{title:'Pick a day and time',sub:'Kings Cuts · '+svc.n+' · '+svc.d,cta:'Continue with '+day.w+' '+day.d+' · '+s.slot,next:go.bNote},
+      bNote:{title:'Anything the shop should know?',sub:'Optional.',cta:'Review booking',next:go.bReview},
+      bReview:{title:'Check and confirm',sub:'Nothing is charged in the app.',cta:'Confirm booking',next:go.bDone}};
+    const sheet=SH[sc]||{title:'',sub:'',cta:'',next:null};
+    if(si>=0) sheet.kicker='Step '+(si+1)+' of 5 · Kings Cuts';
+    sheet.steps=si>=0?steps.map((_,i)=>({c:i<=si?'var(--color-accent)':'var(--color-divider)'})):[];
+    const Q={
+      qWait:{bg:'var(--color-bg)',fg:'var(--color-text)',pill:'Waiting',kicker:'Your place in the queue',big:'3',size:'220px',line:'Your turn around 14:40',aK:'People ahead of you',aV:'2',bK:'Estimated wait',bV:'~25 min',cur:0,cycle:go.qNext},
+      qNext:{bg:'var(--pn-danger)',fg:'#fff',pill:"You're next",kicker:'Head over now',big:"You're next.",size:'84px',line:'Murat is ready in about 5 min. Show your name at the desk: Yusuf.',aK:'People ahead of you',aV:'0',bK:'Your turn',bV:'~14:40',cur:1,cycle:go.qServe},
+      qServe:{bg:'var(--color-text)',fg:'var(--color-bg)',pill:'Serving',kicker:'In the chair with Murat',big:'Serving',size:'92px',line:'Fade + beard · 20\u00a0€ cash at the shop',aK:'Started',aV:'14:41',bK:'Done around',bV:'15:25',cur:2,cycle:go.qWait}};
+    const q=Q[sc]||Q.qWait;
+    q.track=['Waiting',"You're next",'Serving'].map((n,i)=>({n,op:i<=q.cur?1:.3,w:i===q.cur?800:600,mark:i<q.cur?icS.check:''}));
+    return {
+      theme:this.props.theme||'dark', viewList:['home','loadSearch','emptySearch'].includes(sc), nm:Object.fromEntries(["view","city","svc","qsvc","sty","day","slot","btab","ap","pfor","htype"].map(n=>[n,n+'-'+(this.uid||(this.uid=Math.random().toString(36).slice(2)))])),label:LABELS[sc], ic,icS,icL,icXL, go,is,isSheet,isQueue,isDiscover,isLock,showTabs,tabs,sheet,q,
+      showStatus:true, homeBar:isQueue&&sc==='qNext'?'#fff':(isLock?'#fff':'var(--color-text)'), noop:()=>{},
+      cities:[['Berlin','Neukölln, Kreuzberg, Wedding, Moabit'],['Köln','Ehrenfeld, Kalk, Mülheim'],['Frankfurt am Main','Bahnhofsviertel, Bockenheim'],['Saarbrücken','St. Johann, Malstatt']].map(([n,sub],i)=>({n,sub,on:s.city===i,pick:()=>set({city:i})})),
+      chips:CHIPS.map((n,i)=>({n,on:!!s.chips[i],pick:()=>set({chips:{...s.chips,[i]:!s.chips[i]}})})),
+      resultCount:'24 open now near you',
+      prefFor:["Men's","Women's",'Kids','No preference'].map((n,i)=>({n,on:s.pfor===i,pick:()=>set({pfor:i})})),
+      hairTypes:[['Straight','Type 1'],['Wavy','Type 2'],['Curly','Type 3'],['Coily / Afro','Type 4'],['Locs','Any length'],['Not sure','Skip for now']].map(([n,sub],i)=>({n,sub,on:s.htype===i,pick:()=>set({htype:i})})),
+      specChips:['African hair','Turkish barber','Arab barber','Asian hair','Curly specialists'].map((n,i)=>({n,on:!!s.spec[i],pick:()=>set({spec:{...s.spec,[i]:!s.spec[i]}})})),
+      styleChips:['Fade','Taper','Beard','Braids','Locs','Twists','Extensions','Colour','Silk press','Buzz cut'].map((n,i)=>({n,on:!!s.sty2[i],pick:()=>set({sty2:{...s.sty2,[i]:!s.sty2[i]}})})),
+      hairSummary:["Men's","Women's",'Kids','Any'][s.pfor]+' · '+['Straight','Wavy','Curly','Coily','Locs','—'][s.htype],
+      results:RESULTS,
+      portfolio:['Skin fade','Taper','Beard line','Crop','Kids','Fade + design'],
+      services:SVC.map((x,i)=>({...x,on:s.svc===i,pick:()=>set({svc:i})})),
+      stylists:STY.map((x,i)=>({...x,on:s.sty===i,pick:()=>set({sty:i})})),
+      stylistsOnly:STY.slice(1),
+      days:DAYS.map((x,i)=>({...x,on:s.day===i,closed:!!x.closed,op:x.closed?.45:1,pick:()=>set({day:i})})),
+      slots:SLOTS.map(t=>{const tk=TAKEN.includes(t);return {t,taken:tk,on:s.slot===t,deco:tk?'line-through':'none',op:tk?.45:1,pick:()=>set({slot:t})};}),
+      summary:[{k:'Service',v:svc.n+' · '+svc.d},{k:'Stylist',v:sty.n},{k:'When',v:day.w+' '+day.d+' · '+s.slot},{k:'Where',v:'Sonnenallee 112'},{k:'Note',v:'First visit'}],
+      btabs:[['up','Upcoming'],['past','Past'],['fav','Favourites']].map(([k,n])=>({n,on:s.btab===k,pick:()=>set({btab:k})})),
+      bt:{up:s.btab==='up',past:s.btab==='past',fav:s.btab==='fav'},
+      past:[{name:'Kings Cuts Neukölln',date:'Fr 10.10.',svc:'Fade + beard · Murat · 20 €',canReview:true},{name:'Afro Lounge',date:'Sa 13.09.',svc:'Fade · 15 €',canReview:false},{name:'Kings Cuts Neukölln',date:'Fr 22.08.',svc:'Fade · 15 €',canReview:false}],
+      stars:[1,2,3,4,5].map(n=>({on:n<=s.rating,off:n>s.rating,label:n+' of 5 stars',pick:()=>set({rating:n})})),
+      ratingLabel:s.rating+' of 5 · '+RATE[s.rating],
+      toggles:[['queue','Queue updates',"When you move up and when you're next"],['remind','Booking reminders','2 h before, and a day before'],['offers','News from favourites','New stylists, free slots today']].map(([k,n,sub])=>{const on=s.tg[k];return {n,sub,on,state:on?'On':'Off',justify:on?'flex-end':'flex-start',track:on?'var(--color-accent-600)':'transparent',knob:on?'#fff':'var(--color-text)',pick:()=>set({tg:{...s.tg,[k]:!on}})};})
+    };
+  }
+}
+</script>
+</body>
+</html>

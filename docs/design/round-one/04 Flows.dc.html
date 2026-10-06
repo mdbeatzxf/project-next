@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="pn.css">
+<style>body{margin:0;background:#09090b}a{color:#7aa2ff}a:hover{color:#3b74ff}</style>
+</helmet>
+<div style="width:2000px;padding:64px;background:#09090b;color:#fafafa;font-family:var(--font-body)">
+  <div style="display:flex;align-items:flex-end;gap:48px;border-bottom:2px solid #ffffff26;padding-bottom:24px;margin-bottom:40px">
+    <div><div style="font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7aa2ff">04</div><h1 style="font-size:72px;letter-spacing:-.04em;margin:0;line-height:1">Flows</h1></div>
+    <p style="max-width:620px;margin:0;font-size:17px;color:#a1a1aa">Client: discover → book or join queue → notified → visit → review. Provider: onboarding → Today → done. Frames are the real screens at 50 % and 32 %.</p>
+    <div style="display:flex;gap:16px;font-size:15px;margin-left:auto"><a href="00 Cover and Direction.dc.html">00 Cover</a><a href="02 Client App.dc.html">02 Client</a><a href="03 Provider Dashboard.dc.html">03 Provider</a><a href="05 Open Questions.dc.html">05 Questions</a></div>
+  </div>
+  <sc-for list="{{ flows }}" as="fl" hint-placeholder-count="3">
+    <section data-screen-label="{{ fl.n }}" style="margin-bottom:56px">
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:20px"><h2 style="font-size:32px;letter-spacing:-.02em;margin:0">{{ fl.n }}</h2><span style="font-size:16px;color:#a1a1aa">{{ fl.note }}</span></div>
+      <div style="display:flex;align-items:flex-start;gap:0">
+        <sc-for list="{{ fl.steps }}" as="s" hint-placeholder-count="8">
+          <div style="display:flex;align-items:flex-start">
+            <sc-if value="{{ s.arrow }}" hint-placeholder-val="{{ false }}"><div style="width:44px;height:{{ s.mid }};display:flex;align-items:flex-end;justify-content:center;color:#7aa2ff;font-size:24px;font-weight:700">→</div></sc-if>
+            <div style="display:flex;flex-direction:column;gap:10px;width:{{ s.w }}">
+              <div style="display:flex;flex-direction:column;line-height:1.2;min-height:40px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7aa2ff">{{ s.stage }}</span><span style="font-size:14px;font-weight:700">{{ s.label }}</span></div>
+              <div style="width:{{ s.w }};height:{{ s.h }};overflow:hidden;box-shadow:0 0 0 1px #ffffff1f">
+                <div style="width:{{ s.fw }};height:{{ s.fh }};transform:scale({{ s.sc }});transform-origin:0 0;pointer-events:none">
+                  <sc-if value="{{ s.client }}" hint-placeholder-val="{{ true }}"><dc-import name="Client Screen" screen="{{ s.k }}" hint-size="390px,844px"></dc-import></sc-if>
+                  <sc-if value="{{ s.provider }}" hint-placeholder-val="{{ false }}"><dc-import name="Provider Screen" screen="{{ s.k }}" device="{{ s.device }}" style="width:{{ s.fw }};height:{{ s.fh }};display:block" hint-size="1440px,900px"></dc-import></sc-if>
+                </div>
+              </div>
+              <span style="font-size:13px;color:#a1a1aa;text-wrap:pretty">{{ s.note }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const C=(k,stage,label,note)=>({k,stage,label,note,client:true,provider:false,fw:'390px',fh:'844px',sc:.5,w:'195px',h:'422px',mid:'260px'});
+const P=(k,device,stage,label,note)=>{const t=device==='tablet';return {k,device,stage,label,note,client:false,provider:true,fw:t?'1024px':'1440px',fh:t?'768px':'900px',sc:t?.38:.32,w:t?'389px':'461px',h:t?'292px':'288px',mid:'200px'};};
+const F=[
+ {n:'Client · book a slot',note:'Discover → book → reminded → visit → review',steps:[C('home','Discover','Home / Search','Filters + live queue hint'),C('profile','Discover','Provider profile','Tap Book'),C('bSvc','Book','Booking 1 · Service',''),C('bTime','Book','Booking 3 · Day and time','Stylist and note are optional'),C('bReview','Book','Booking 5 · Review and confirm','Cash and privacy stated'),C('bDone','Booked','Booking · Confirmation','Add to calendar'),C('bookings','Visit','My bookings','Reminder push 2 h before'),C('review','Review','Review','Only after a done booking')]},
+ {n:'Client · join the queue',note:'Discover → join queue → notified → visit → review',steps:[C('profile','Discover','Provider profile','Tap Join queue'),C('qJoin','Join','Join queue sheet','Place and wait shown before joining'),C('qWait','Wait','Queue status · Waiting','Leave the shop, stay close'),C('push','Notified','Push notification','One push when next'),C('live','Notified','Lock-screen live activity','Updates without opening'),C('qNext','Notified',"Queue status · You're next",'Red field, walk over'),C('qServe','Visit','Queue status · Serving','Pay cash in the shop'),C('review','Review','Review','Prompt after Done')]},
+ {n:'Provider · first day',note:'Onboarding → Today → done',steps:[P('wizType','desktop','Onboarding','Wizard · Provider type','Shop, independent or mobile'),P('wizServices','desktop','Onboarding','Wizard · Services and prices','Go live after 4 steps'),P('today','tablet','Today','Today · Tablet','Next calls the first in line'),P('today','desktop','Done','Today · Desktop','Done frees the chair, review prompt goes to the Client')]}];
+class Component extends DCLogic {
+  renderVals(){ return { flows:F.map(f=>({...f,steps:f.steps.map((s,i)=>({...s,arrow:i>0}))})) }; }
+}
+</script>
+</body>
+</html>
