@@ -8,10 +8,13 @@ Purpose: the first UI design round, exported 1:1 from Claude Design. Do not edit
 
 ## How to open
 
-Open `00 Cover and Direction.dc.html` in a browser. The pages link to each other. They load React and Babel from unpkg.com at runtime, so you need internet access. Live via GitHub Pages: https://mdbeatzxf.github.io/project-next/docs/design/round-one/00%20Cover%20and%20Direction.dc.html
+Start at `index.html`, the overview of all pages with thumbnails and the prototype. Live via GitHub Pages: https://mdbeatzxf.github.io/project-next/docs/design/round-one/
+
+The pages link to each other. They load React and Babel from unpkg.com at runtime, so you need internet access.
 
 | Page | What |
 |---|---|
+| `index.html` | Overview of all pages with thumbnails and the prototype (added by us, not part of the export) |
 | `00 Cover and Direction.dc.html` | Cover, visual direction, colour roles |
 | `01 Design System.dc.html` | Tokens, type, parts |
 | `02 Client App.dc.html` | 32 client frames, iPhone 390 × 844, dark first plus light samples |
@@ -22,4 +25,4 @@ Open `00 Cover and Direction.dc.html` in a browser. The pages link to each other
 | `Client Screen.dc.html`, `Provider Screen.dc.html` | The live screen components used by the pages above |
 | `pn.css`, `icons.js`, `support.js`, `.thumbnail` | Shared styles, icons, runtime and preview image |
 
-PNG renders of every page are in `exports/` so they can be viewed on GitHub without a browser runtime.
+PNG renders of every page are in `exports/` so they can be viewed on GitHub without a browser runtime; `exports/thumbs/` holds the small previews used by `index.html`.
