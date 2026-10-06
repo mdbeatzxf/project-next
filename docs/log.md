@@ -59,3 +59,12 @@ Copy the template, fill it in, append it at the bottom. Keep it short: what chan
 
 **Open points / next**
 - Team review of the docs and the design decisions before the next meeting.
+
+## 2026-10-06 – Marcus – AI session
+
+**What changed**
+- `docs/design/round-one/index.html`: overview page for the design round with thumbnails of all seven pages and the prototype, in the design's own tokens. Small JPEG previews in `exports/thumbs/`.
+- README, docs index and design READMEs link the overview instead of the cover page.
+
+**Open points / next**
+- Team confirms the design decisions before the next meeting.

@@ -15,4 +15,4 @@ Purpose: where UI design work lives and how it links back to the docs.
 
 | Date | What | Tool | Link | Exports |
 |---|---|---|---|---|
-| 2026-10-06 | Round one: design system, 32 Client frames, 12 Provider frames, flows, prototype. From `claude-design-prompt.md`. Decisions to confirm: `round-one-decisions.md` | Claude Design | https://claude.ai/design/p/8793adfc-8910-4925-87a8-7667aed3dc07?via=share | `round-one/` (HTML export, 1:1) and `round-one/exports/` (PNG per page) |
+| 2026-10-06 | Round one: design system, 32 Client frames, 12 Provider frames, flows, prototype. From `claude-design-prompt.md`. Decisions to confirm: `round-one-decisions.md` | Claude Design | https://claude.ai/design/p/8793adfc-8910-4925-87a8-7667aed3dc07?via=share | `round-one/` (HTML export, 1:1, overview in `index.html`) and `round-one/exports/` (PNG per page). Live: https://mdbeatzxf.github.io/project-next/docs/design/round-one/ |

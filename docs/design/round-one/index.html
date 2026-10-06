@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>project-next · Design round one</title>
+<link rel="stylesheet" href="pn.css">
+<style>
+/* Index of the exported design pages. Uses the design's own tokens from pn.css (dark first). */
+html,body{background:var(--color-bg);color:var(--color-text)}
+body{font-family:var(--font-body);line-height:1.45}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:20px;padding-block:40px 64px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--pn-accent-text);margin:0 0 14px}
+h1{font-size:clamp(40px,7vw,88px);line-height:.95;letter-spacing:-.04em;margin:0 0 18px;text-wrap:balance}
+.lead{font-size:18px;max-width:720px;color:var(--color-text);margin:0 0 8px}
+.note{font-size:14px;color:var(--pn-muted);max-width:720px;margin:0 0 36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin:0 0 48px}
+.card{display:flex;flex-direction:column;min-width:0;border:1px solid var(--color-divider);border-radius:12px;background:var(--color-surface);overflow:hidden;color:inherit;text-decoration:none;transition:border-color .15s}
+.card:hover,.card:focus-visible{border-color:var(--color-accent);outline:none}
+.card.hero{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+.card.hero .thumb{flex:1 1 420px;aspect-ratio:16/8}
+.card.hero .body{flex:1 1 300px;align-self:center}
+.thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--pn-ph1);border-bottom:1px solid var(--color-divider)}
+.body{padding:16px 18px 18px}
+.num{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--pn-accent-text);margin:0 0 6px}
+.card h2{font-size:22px;margin:0 0 6px;letter-spacing:-.02em}
+.card p{font-size:14px;color:var(--pn-muted);margin:0 0 12px}
+.open{font-size:14px;font-weight:600;color:var(--pn-accent-text)}
+.open::after{content:" \2192"}
+h3{font-size:16px;letter-spacing:.02em;text-transform:uppercase;color:var(--pn-muted);margin:0 0 12px;font-weight:600}
+ul.plain{list-style:none;padding:0;margin:0 0 36px;display:grid;gap:8px;font-size:15px}
+ul.plain li{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+ul.plain .k{color:var(--pn-muted);min-width:170px}
+footer{border-top:1px solid var(--color-divider);padding-top:16px;font-size:13px;color:var(--pn-muted);display:flex;gap:16px;flex-wrap:wrap}
+@media (max-width:640px){.wrap{padding-block:28px 48px}.card.hero{flex-direction:column}.card.hero .thumb{aspect-ratio:16/10}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">project-next · design round one · exported 1:1 from Claude Design · 2026-10-06</p>
+  <h1>Design round one</h1>
+  <p class="lead">Design system, 32 Client app frames, 12 Provider dashboard frames, flows, open questions and a click-through prototype. Seven pages, each with its own navigation at the top.</p>
+  <p class="note">The pages run in the browser with React and Babel loaded from unpkg.com, so they need internet. Everything marked as a decision on page 05 is a proposal until the team confirms it.</p>
+
+  <div class="grid">
+    <a class="card hero" href="Client%20Prototype.dc.html">
+      <img class="thumb" src="exports/thumbs/client-prototype.jpg" alt="Client prototype start screen" loading="lazy">
+      <div class="body">
+        <p class="num">Prototype</p>
+        <h2>Client app, click-through</h2>
+        <p>Tap through from onboarding: login, search, Provider profile, Book or Join queue. On the queue screen, step through the live states. Jump to any start point.</p>
+        <span class="open">Open prototype</span>
+      </div>
+    </a>
+    <a class="card" href="00%20Cover%20and%20Direction.dc.html">
+      <img class="thumb" src="exports/thumbs/00-cover-and-direction.jpg" alt="Cover page" loading="lazy">
+      <div class="body"><p class="num">00</p><h2>Cover and direction</h2><p>Neutral first: black, white, greys, Geist. Blue for action, red for decline and "You're next". Brand colour and name come later.</p><span class="open">Open page</span></div>
+    </a>
+    <a class="card" href="01%20Design%20System.dc.html">
+      <img class="thumb" src="exports/thumbs/01-design-system.jpg" alt="Design system page" loading="lazy">
+      <div class="body"><p class="num">01</p><h2>Design system</h2><p>Colour roles, type scale, spacing, buttons, chips, inputs, list rows, sheets, status pills.</p><span class="open">Open page</span></div>
+    </a>
+    <a class="card" href="02%20Client%20App.dc.html">
+      <img class="thumb" src="exports/thumbs/02-client-app.jpg" alt="Client app frames" loading="lazy">
+      <div class="body"><p class="num">02</p><h2>Client app</h2><p>32 live frames, iPhone 390 × 844, dark first plus light samples: onboarding, search, profile, booking, queue status, bookings, review, settings, empty and error states.</p><span class="open">Open page</span></div>
+    </a>
+    <a class="card" href="03%20Provider%20Dashboard.dc.html">
+      <img class="thumb" src="exports/thumbs/03-provider-dashboard.jpg" alt="Provider dashboard frames" loading="lazy">
+      <div class="body"><p class="num">03</p><h2>Provider dashboard</h2><p>12 frames, desktop 1440 × 900 and tablet 1024 × 768: onboarding wizard, Today with the live queue, calendar, services, portfolio, stylists, settings, stats (later).</p><span class="open">Open page</span></div>
+    </a>
+    <a class="card" href="04%20Flows.dc.html">
+      <img class="thumb" src="exports/thumbs/04-flows.jpg" alt="Flows page" loading="lazy">
+      <div class="body"><p class="num">04</p><h2>Flows</h2><p>Client: book a slot. Client: join the queue. Provider: first day. Real screens at 50 % and 32 %.</p><span class="open">Open page</span></div>
+    </a>
+    <a class="card" href="05%20Open%20Questions.dc.html">
+      <img class="thumb" src="exports/thumbs/05-open-questions.jpg" alt="Open questions page" loading="lazy">
+      <div class="body"><p class="num">05</p><h2>Open questions</h2><p>20 decisions the design made where the brief was silent, each with the question for the team. Mirrored in the repo as round-one-decisions.md.</p><span class="open">Open page</span></div>
+    </a>
+  </div>
+
+  <h3>Also in this folder</h3>
+  <ul class="plain">
+    <li><span class="k">Components</span><span><a href="Client%20Screen.dc.html">Client Screen</a> and <a href="Provider%20Screen.dc.html">Provider Screen</a>: the live screen components the pages above embed.</span></li>
+    <li><span class="k">Static renders</span><span><a href="https://github.com/mdbeatzxf/project-next/tree/main/docs/design/round-one/exports">exports/</a> on GitHub: one PNG per page, viewable without a browser runtime.</span></li>
+    <li><span class="k">Source</span><span><a href="https://claude.ai/design/p/8793adfc-8910-4925-87a8-7667aed3dc07?via=share">Claude Design project</a> (sign-in required). Do not edit the export by hand; change the design there and re-export.</span></li>
+    <li><span class="k">Decisions to confirm</span><span><a href="https://github.com/mdbeatzxf/project-next/blob/main/docs/design/round-one-decisions.md">round-one-decisions.md</a> on GitHub.</span></li>
+  </ul>
+
+  <footer>
+    <a href="https://github.com/mdbeatzxf/project-next">Repository</a>
+    <a href="https://github.com/mdbeatzxf/project-next/blob/main/docs/app-sketch.md">App sketch</a>
+    <a href="../../index.html">Interactive sketch page</a>
+    <span>project-next · draft v0.1 · everything here is a proposal</span>
+  </footer>
+</div>
+</body>
+</html>
