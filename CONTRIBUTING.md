@@ -20,6 +20,7 @@ Three people, three PCs, and each of us also runs AI coding sessions on this rep
 | UI design (prompt, links, exports) | `docs/design/` |
 | Code (later) | `apps/` (deployable apps), `packages/` (shared code) |
 | Index of all docs | `docs/README.md` |
+| Published site | https://mdbeatzxf.github.io/project-next/ (GitHub Pages, branch `main`, folder `/`; settings under Repository settings, Pages) |
 
 ## Branching & PRs
 

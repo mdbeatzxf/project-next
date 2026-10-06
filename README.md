@@ -11,7 +11,7 @@ A side project by Marcus, Alex and Naayi. Providers (barbershops, salons, indepe
 1. [CLAUDE.md](CLAUDE.md) and [CONTRIBUTING.md](CONTRIBUTING.md) – how we work: branches, commits, PRs, docs rules, AI coding sessions.
 2. [docs/vision.md](docs/vision.md) – the product vision.
 3. [docs/app-sketch.md](docs/app-sketch.md) – roles, flows, screens, architecture, data model, MVP scope.
-4. [docs/index.html](docs/index.html) – the same sketch as an interactive page. Published via GitHub Pages at https://mdbeatzxf.github.io/project-next/ (deployed from `docs/` by `.github/workflows/pages.yml`).
+4. [docs/index.html](docs/index.html) – the same sketch as an interactive page. Live at https://mdbeatzxf.github.io/project-next/docs/index.html.
 5. [docs/design/round-one/](docs/design/round-one/) – the UI design, round one (Claude Design export, PNG renders in `exports/`). Decisions to confirm: [docs/design/round-one-decisions.md](docs/design/round-one-decisions.md).
 6. [docs/ideas.md](docs/ideas.md) – idea backlog. Add yours via PR.
 7. [docs/todo.md](docs/todo.md) – to-dos with owners, grouped by phase.
@@ -19,6 +19,15 @@ A side project by Marcus, Alex and Naayi. Providers (barbershops, salons, indepe
 9. [docs/meetings/](docs/meetings/) – meeting notes, starting with the kickoff.
 
 Full index: [docs/README.md](docs/README.md).
+
+## Published site
+
+GitHub Pages publishes the `main` branch from the repository root: https://mdbeatzxf.github.io/project-next/
+
+- App sketch: https://mdbeatzxf.github.io/project-next/docs/index.html
+- Design round one: https://mdbeatzxf.github.io/project-next/docs/design/round-one/00%20Cover%20and%20Direction.dc.html
+
+Every merge to `main` redeploys within about a minute. Markdown files are also rendered as plain HTML pages there, but Mermaid diagrams only render on GitHub itself.
 
 ## Team
 
