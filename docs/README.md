@@ -8,7 +8,7 @@ Purpose: index of everything in `docs/`, with the reading order for newcomers.
 2. [`vision.md`](vision.md) – what we build and why.
 3. [`meetings/2026-09-kickoff.md`](meetings/2026-09-kickoff.md) – where the vision comes from.
 4. [`app-sketch.md`](app-sketch.md) – roles, flows, screens, architecture, data model, MVP scope.
-5. [`index.html`](index.html) – the same sketch as an interactive page. Open it locally in a browser or via GitHub Pages served from `/docs`.
+5. [`index.html`](index.html) – the same sketch as an interactive page. Published at https://mdbeatzxf.github.io/project-next/ (GitHub Pages, deployed from `docs/`).
 6. [`design/round-one/`](design/round-one/) – the UI design (Claude Design export) and [`design/round-one-decisions.md`](design/round-one-decisions.md) – what to confirm.
 7. [`decisions/0001-tech-stack.md`](decisions/0001-tech-stack.md) – the proposed tech stack.
 8. [`todo.md`](todo.md) – what is next and who owns it.
