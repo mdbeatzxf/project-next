@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="pn.css">
+<script src="icons.js"></script>
+<style>body{margin:0;background:#0b0b0c}</style>
+</helmet>
+<div data-theme="dark" style="width:1600px;padding:64px;background:var(--color-bg);color:var(--color-text)">
+  <div style="display:flex;align-items:flex-end;gap:48px;border-bottom:1px solid var(--color-divider);padding-bottom:24px">
+    <div><div style="font-size:14px;font-weight:600;color:var(--pn-accent-text)">01</div><h1 style="font-size:64px;letter-spacing:-.04em;margin:0;line-height:1">Design system</h1></div>
+    <p style="max-width:620px;margin:0;font-size:17px;color:var(--pn-muted)">Neutral on purpose until the brand exists. Black and white carry everything. Blue means "do this" or "selected". Red means "decline", "remove" or "look now".</p>
+    <div style="display:flex;gap:16px;font-size:15px;margin-left:auto"><a href="00 Cover and Direction.dc.html">00 Cover</a><a href="02 Client App.dc.html">02 Client</a><a href="03 Provider Dashboard.dc.html">03 Provider</a><a href="04 Flows.dc.html">04 Flows</a><a href="05 Open Questions.dc.html">05 Questions</a></div>
+  </div>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Colour roles</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">Four roles, two themes. Contrast against the ground it sits on.</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <sc-for list="{{ palettes }}" as="p" hint-placeholder-count="2">
+        <div data-theme="{{ p.theme }}" style="background:var(--color-bg);color:var(--color-text);border:1px solid var(--color-divider);border-radius:16px;overflow:hidden">
+          <div style="padding:14px 16px;font-weight:600;border-bottom:1px solid var(--color-divider)">{{ p.n }}</div>
+          <sc-for list="{{ p.sw }}" as="s" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:56px 1fr 90px 130px;align-items:center;gap:16px;min-height:56px;padding:0 16px;border-bottom:1px solid var(--color-divider)">
+              <span style="height:36px;border-radius:8px;background:{{ s.hex }};border:1px solid var(--color-divider)"></span>
+              <span style="display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">{{ s.token }}</span><span style="font-size:13px;color:var(--pn-muted)">{{ s.use }}</span></span>
+              <span style="font:500 13px ui-monospace,monospace">{{ s.hex }}</span>
+              <span style="font-size:13px;font-weight:600">{{ s.cr }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">When to use which colour</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+      <div style="padding:16px;border:1px solid var(--color-divider);border-radius:16px;display:flex;flex-direction:column;gap:10px"><span style="font-weight:600">Black / white</span><span style="font-size:14px;color:var(--pn-muted)">Text, icons, selected chips and segments, secondary buttons, "Serving" state.</span><span style="display:flex;gap:6px"><span class="seg-opt" style="background:var(--color-text);color:var(--color-bg);min-height:36px;padding:0 12px;border-radius:999px;font-weight:600">Open now</span></span></div>
+      <div style="padding:16px;border:1px solid var(--color-divider);border-radius:16px;display:flex;flex-direction:column;gap:10px"><span style="font-weight:600;color:var(--pn-accent-text)">Blue · action</span><span style="font-size:14px;color:var(--pn-muted)">One primary button per screen, links, radio and progress, verified badge, live queue dot.</span><button class="btn btn-primary" style="min-height:44px;justify-content:space-between;padding:0 16px">Book{{ ic.arrow }}</button></div>
+      <div style="padding:16px;border:1px solid var(--color-divider);border-radius:16px;display:flex;flex-direction:column;gap:10px"><span style="font-weight:600;color:var(--pn-danger-text)">Red · decline</span><span style="font-size:14px;color:var(--pn-muted)">Decline, cancel, leave queue, delete account, no-show. Always outlined, never the main action.</span><button class="btn btn-danger" style="min-height:44px;justify-content:space-between;padding:0 16px">Decline{{ ic.x }}</button></div>
+      <div style="padding:16px;border:1px solid var(--color-divider);border-radius:16px;display:flex;flex-direction:column;gap:10px"><span style="font-weight:600;color:var(--pn-danger-text)">Red · important</span><span style="font-size:14px;color:var(--pn-muted)">Rare. Full red field only for "You're next", where the Client must act now.</span><span style="display:flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;background:var(--pn-danger);color:#fff;font-weight:700">You're next</span></div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Type</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">Geist 400 / 600 / 700, one family. App body 16 px minimum; dashboard body 15 px.</p></div>
+    <div>
+      <sc-for list="{{ type }}" as="t" hint-placeholder-count="8">
+        <div style="display:grid;grid-template-columns:200px 1fr;align-items:baseline;gap:24px;padding:10px 0;border-bottom:1px solid var(--color-divider)">
+          <span style="display:flex;flex-direction:column;line-height:1.3"><span style="font-weight:600">{{ t.n }}</span><span style="font:500 12px ui-monospace,monospace;color:var(--pn-muted)">{{ t.spec }}</span></span>
+          <span style="font-size:{{ t.size }};font-weight:{{ t.w }};line-height:{{ t.lh }};letter-spacing:{{ t.ls }}">{{ t.sample }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Spacing, radius, size</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">4 px base, 20 px app edge. Radius 8 / 12 / 22, pills 999. Tap targets 44 px or more, primary 56 px.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap">
+      <sc-for list="{{ space }}" as="s" hint-placeholder-count="8"><div style="display:flex;flex-direction:column;gap:8px"><span style="width:{{ s.px }};height:{{ s.px }};background:var(--color-text);border-radius:2px"></span><span style="font-weight:600">{{ s.n }}</span><span style="font:500 12px ui-monospace,monospace;color:var(--pn-muted)">{{ s.px }}</span></div></sc-for>
+      <div style="margin-left:32px;display:flex;gap:20px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="width:44px;height:44px;border:1.5px dashed var(--pn-accent-text);border-radius:999px"></span><span style="font-size:13px;font-weight:600">Min tap 44</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="width:160px;height:56px;border:1.5px dashed var(--pn-accent-text);border-radius:12px"></span><span style="font-size:13px;font-weight:600">Primary 56 · r12</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="width:160px;height:84px;border:1.5px dashed var(--pn-accent-text);border-radius:12px"></span><span style="font-size:13px;font-weight:600">Tablet queue action 84</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Buttons</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">Label left, icon right on full-width buttons. Focus: 2 px blue ring, offset 2.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;color:var(--pn-muted)">Primary</span><button class="btn btn-primary" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Book{{ ic.arrow }}</button><button class="btn btn-primary" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between;background:var(--color-accent-700)">Pressed{{ ic.arrow }}</button><button class="btn btn-primary" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between;outline:2px solid var(--color-accent);outline-offset:2px">Focus{{ ic.arrow }}</button><button class="btn btn-primary" disabled style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Disabled{{ ic.arrow }}</button></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;color:var(--pn-muted)">Secondary</span><button class="btn btn-secondary" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Join queue{{ ic.users }}</button><button class="btn btn-secondary" style="min-height:44px;padding:0 14px;justify-content:space-between">Small · 44{{ ic.plus }}</button></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;color:var(--pn-muted)">Inverse · Ghost</span><button class="btn" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:flex-start;background:var(--color-text);color:var(--color-bg)">Continue with Apple</button><button class="btn btn-ghost" style="min-height:44px;font-size:16px;justify-content:flex-start">Not now</button></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;color:var(--pn-muted)">Danger · Icon</span><button class="btn btn-danger" style="min-height:56px;font-size:17px;padding:0 20px;justify-content:space-between">Leave queue{{ ic.x }}</button><div style="display:flex;gap:8px"><button class="btn btn-icon" aria-label="Back" style="width:48px;height:48px;border:1px solid var(--color-divider)">{{ ic.back }}</button><button class="btn btn-icon" aria-label="Favourite" style="width:48px;height:48px;border:1px solid var(--color-divider)">{{ ic.heart }}</button></div></div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--color-divider)">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Chips and status pills</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">Chips filter and fill black when on. Pills report a state with an icon plus a word, never colour alone.</p></div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <label class="seg-opt" style="min-height:40px;padding:0 14px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="checkbox" checked="{{ true }}" onChange="{{ noop }}">Open now</label>
+        <label class="seg-opt" style="min-height:40px;padding:0 14px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="checkbox" onChange="{{ noop }}">Comes to you</label>
+        <label class="seg-opt" style="min-height:40px;padding:0 14px;font-size:15px;font-weight:600;border:1px solid var(--color-strong);border-radius:999px"><input type="checkbox" onChange="{{ noop }}">African hair</label>
+        <span class="tag tag-neutral" style="font-size:13px;margin-left:24px">Specialty tag</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:0 10px;border-radius:999px;background:var(--color-surface);font-size:14px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent)"></span>3 waiting · ~35 min</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <sc-for list="{{ pills }}" as="p" hint-placeholder-count="8">
+          <span style="display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;background:{{ p.bg }};color:{{ p.fg }};border:1px {{ p.bs }} {{ p.bd }};font-size:13px;font-weight:600">{{ p.icon }}{{ p.n }}</span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0">
+    <div><h2 style="font-size:26px;margin:0 0 8px">Card, list rows, sheet, toast</h2><p style="font-size:15px;color:var(--pn-muted);margin:0">Photo-first cards with 1 px dividers. Sheets: 22 px top radius over a 66 % black scrim.</p></div>
+    <div style="display:grid;grid-template-columns:340px 340px 1fr;gap:32px;align-items:start">
+      <div>
+        <div style="height:180px;position:relative;display:flex;align-items:flex-end;padding:10px"><span class="ph" style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px)"></span><span style="position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:7px;min-height:30px;padding:0 10px;border-radius:999px;background:var(--color-bg);font-size:14px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent)"></span>3 waiting · ~35 min</span><span style="position:relative;font:500 11px/1 ui-monospace,monospace;background:var(--color-bg);padding:5px 7px;border-radius:6px">PHOTO · skin fade</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:12px"><span style="font-weight:700;font-size:20px;letter-spacing:-.02em">Kings Cuts Neukölln</span><span style="display:flex;align-items:center;gap:4px;font-weight:600">{{ icS.starF }}4.8</span></div>
+        <div style="display:flex;gap:14px;margin-top:8px;font-size:15px;color:var(--pn-muted);padding-bottom:16px;border-bottom:1px solid var(--color-divider)"><span>0.6 km</span><span>132 reviews</span><span style="margin-left:auto;color:var(--color-text);font-weight:600">from 8 €</span></div>
+      </div>
+      <div style="border-top:1px solid var(--color-divider)">
+        <div style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--color-divider)">{{ ic.pin }}<span>Sonnenallee 112</span><span style="color:var(--pn-muted)">0.6 km</span><span style="margin-left:auto">{{ ic.right }}</span></div>
+        <label class="radio" style="display:flex;width:100%;min-height:64px;gap:14px;border-bottom:1px solid var(--color-divider);font-size:17px"><input type="radio" name="dsr-n" checked="{{ true }}" onChange="{{ noop }}"><span class="dot" style="width:22px;height:22px"></span><span style="flex:1;display:flex;flex-direction:column;line-height:1.25"><span style="font-weight:600">Fade + beard</span><span style="font-size:14px;color:var(--pn-muted)">45 min</span></span><span style="font-weight:600">20 €</span></label>
+        <div style="display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--color-divider)"><span style="flex:1;font-weight:600">Queue updates</span><span style="font-size:13px;font-weight:600">On</span><span style="width:52px;height:30px;padding:3px;display:flex;justify-content:flex-end;background:var(--color-accent-600);border-radius:999px"><span style="width:24px;height:24px;border-radius:50%;background:#fff"></span></span></div>
+      </div>
+      <div style="display:flex;gap:32px;align-items:flex-start">
+        <div style="width:280px;height:380px;position:relative;overflow:hidden;border-radius:16px">
+          <span style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,var(--pn-ph1) 0 14px,var(--pn-ph2) 14px 28px)"></span><span style="position:absolute;inset:0;background:#000a"></span>
+          <div style="position:absolute;left:0;right:0;bottom:0;top:100px;background:var(--color-bg);border-radius:22px 22px 0 0;padding:8px 16px 16px;display:flex;flex-direction:column">
+            <span style="align-self:center;width:40px;height:4px;border-radius:2px;background:var(--color-strong)"></span>
+            <span style="font-size:13px;font-weight:600;color:var(--pn-muted);margin-top:12px">Step 1 of 5</span>
+            <span style="font-size:22px;font-weight:700;margin-top:6px">Bottom sheet</span>
+            <span style="flex:1"></span>
+            <button class="btn btn-primary" style="min-height:52px;justify-content:space-between;padding:0 16px">Continue{{ ic.arrow }}</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;width:320px">
+          <div style="display:flex;align-items:center;gap:12px;min-height:56px;padding:0 8px 0 16px;border-radius:14px;background:var(--color-text);color:var(--color-bg)">{{ ic.check }}<span style="flex:1;font-weight:600">Booking cancelled</span><button class="btn" style="min-height:44px;color:inherit;text-decoration:underline">Undo</button></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:56px;padding:0 16px;border-radius:14px;background:var(--color-accent-600);color:#fff">{{ ic.users }}<span style="flex:1;font-weight:600">You moved up to place 2</span></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:56px;padding:0 16px;border-radius:14px;background:var(--pn-danger);color:#fff">{{ ic.alert }}<span style="flex:1;font-weight:600">Request declined by the shop</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){ if(!window.pnIcons){ this.t=setInterval(()=>{ if(window.pnIcons){clearInterval(this.t);this.forceUpdate();}},60);} }
+  componentWillUnmount(){ clearInterval(this.t); }
+  renderVals(){
+    const mk=(n,w)=>window.pnIcons?window.pnIcons(React,n,w):new Proxy({},{get:()=>'',has:()=>true});
+    const ic=mk(22),icS=mk(14,2.25);
+    const sw=a=>a.map(([token,hex,use,cr])=>({token,hex,use,cr}));
+    return { ic,icS,noop:()=>{},
+      palettes:[{n:'Dark · default',theme:'dark',sw:sw([['bg','#0b0b0c','Ground','—'],['surface','#18181b','Sheets, inputs, panels','—'],['divider','#2a2a2e','1 px lines','—'],['text','#fafafa','Ink','19 : 1'],['muted','#a1a1aa','Secondary text','7.8 : 1'],['blue · fill','#2f6bff','Primary button, white label','4.6 : 1'],['blue · text','#7aa2ff','Links, active tab','7.6 : 1'],['red','#e0262b / #ff6b6f','Field with white / text on dark','4.6 / 6.8 : 1']])},
+        {n:'Light',theme:'light',sw:sw([['bg','#ffffff','Ground','—'],['surface','#f4f4f5','Sheets, inputs, panels','—'],['divider','#e4e4e7','1 px lines','—'],['text','#0a0a0b','Ink','19.8 : 1'],['muted','#63636b','Secondary text','6.1 : 1'],['blue · fill','#1d5cff','Primary button, white label','5.4 : 1'],['blue · text','#1a52e6','Links, active tab','6.0 : 1'],['red','#d92228 / #c41e22','Field with white / text on light','4.9 / 5.9 : 1']])}],
+      type:[['Queue number','700 · 220/0.82','220px',700,'.82','-.06em','3'],['Display','700 · 56/0.95','56px',700,'.95','-.04em','Booked.'],['H1','700 · 34/1.02','34px',700,'1.02','-.03em','Kings Cuts Neukölln'],['H2 · sheet title','700 · 28/1.05','28px',700,'1.05','-.02em','Pick a day and time'],['Card title','700 · 20/1.15','20px',700,'1.15','-.02em',"Ama's Braids"],['Body','400 · 16/1.45','16px',400,'1.45','0','Pay cash at the shop. No phone number shared.'],['Small','500 · 14/1.4','14px',500,'1.4','0','0.6 km · 132 reviews · from 8 €'],['Label','600 · 13 caps','13px',600,'1.3','.04em','STEP 3 OF 5']].map(([n,spec,size,w,lh,ls,sample])=>({n,spec,size,w,lh,ls,sample})),
+      space:[['1','4px'],['2','8px'],['3','12px'],['4','16px'],['5','20px'],['6','24px'],['8','32px'],['12','48px']].map(([n,px])=>({n,px})),
+      pills:[['Waiting','clock','transparent','var(--color-text)','var(--color-strong)','solid'],["You're next",'bell','var(--pn-danger)','#fff','var(--pn-danger)','solid'],['Serving','scissors','var(--color-text)','var(--color-bg)','var(--color-text)','solid'],['Confirmed','check','var(--pn-accent-soft)','var(--pn-accent-text)','var(--pn-accent-soft)','solid'],['Request sent','clock','transparent','var(--color-text)','var(--color-strong)','dashed'],['Done','check','transparent','var(--pn-muted)','var(--color-divider)','solid'],['Declined','x','var(--pn-danger-soft)','var(--pn-danger-text)','var(--pn-danger-soft)','solid'],['No-show','ban','var(--pn-danger-soft)','var(--pn-danger-text)','var(--pn-danger-text)','solid']].map(([n,i,bg,fg,bd,bs])=>({n,icon:icS[i],bg,fg,bd,bs}))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -9,9 +9,10 @@ Purpose: index of everything in `docs/`, with the reading order for newcomers.
 3. [`meetings/2026-09-kickoff.md`](meetings/2026-09-kickoff.md) – where the vision comes from.
 4. [`app-sketch.md`](app-sketch.md) – roles, flows, screens, architecture, data model, MVP scope.
 5. [`index.html`](index.html) – the same sketch as an interactive page. Open it locally in a browser or via GitHub Pages served from `/docs`.
-6. [`decisions/0001-tech-stack.md`](decisions/0001-tech-stack.md) – the proposed tech stack.
-7. [`todo.md`](todo.md) – what is next and who owns it.
-8. [`log.md`](log.md) – the last entries, to see what happened recently.
+6. [`design/round-one/`](design/round-one/) – the UI design (Claude Design export) and [`design/round-one-decisions.md`](design/round-one-decisions.md) – what to confirm.
+7. [`decisions/0001-tech-stack.md`](decisions/0001-tech-stack.md) – the proposed tech stack.
+8. [`todo.md`](todo.md) – what is next and who owns it.
+9. [`log.md`](log.md) – the last entries, to see what happened recently.
 
 ## All docs
 
@@ -30,6 +31,8 @@ Purpose: index of everything in `docs/`, with the reading order for newcomers.
 | `decisions/0001-tech-stack.md` | Tech stack proposal. Status: proposed. |
 | `design/README.md` | Where UI designs live, how they link back to the sketch. |
 | `design/claude-design-prompt.md` | The prompt we use in Claude Design to produce the UI. |
+| `design/round-one/` | Design round one, exported 1:1 from Claude Design: design system, Client app, Provider dashboard, flows, prototype. PNG renders in `exports/`. |
+| `design/round-one-decisions.md` | The 20 decisions the design made where the brief was silent, with the question for the team on each. Status: proposal. |
 
 ## Related files outside `docs/`
 

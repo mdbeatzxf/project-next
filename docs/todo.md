@@ -23,6 +23,9 @@ Ticked items stay in their phase. We clean up at the end of each phase.
 - [ ] Write the barber survey questions – owner: open – see idea 3 in `ideas.md`
 - [ ] Pick first city/cities – owner: all
 - [ ] Legal basics check: GDPR, Impressum, terms, Providers who are not registered businesses – owner: open
+- [ ] Confirm or overturn the 20 decisions from design round one – owner: all – `design/round-one-decisions.md`
+- [ ] Legal check: hair type and "specialists in" preference in onboarding vs DSGVO Art. 9 – owner: open – decision 06 in `design/round-one-decisions.md`
+- [ ] Decide red vs blue for the "You're next" queue state – owner: all – decision 02 in `design/round-one-decisions.md`
 
 ## Phase 1: MVP build
 

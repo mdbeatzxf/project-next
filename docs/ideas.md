@@ -94,3 +94,10 @@ If an idea needs a longer discussion, open a GitHub Issue with the `Idea` templa
 - **Status:** new
 - **Description:** A visible badge on the Provider profile after ID or business verification by the Platform. Trust is built via reviews and portfolio; the badge adds a Platform-checked layer. Basic admin verification is in MVP scope; the badge design and what exactly is checked are open.
 - **Why it matters:** Clients in a new city book strangers. Trust signals decide whether they do.
+
+### 11. "About your hair" onboarding step
+- **Added by:** design round one (Claude Design)
+- **Date:** 2026-10-06
+- **Status:** new
+- **Description:** Onboarding step 3 asks who the cut is for (men's, women's, kids, no preference), hair type (straight, wavy, curly, coily/afro, locs), and which specialists the Client is looking for. All optional, editable in Profile. Used to sort or filter results. Shops never see the answers.
+- **Why it matters:** Clients in a new city find the right barber faster. Needs a legal check: ethnic origin is special-category data, so we ask for hair type and specialist preference, never origin.

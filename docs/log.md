@@ -39,3 +39,14 @@ Copy the template, fill it in, append it at the bottom. Keep it short: what chan
 **Open points / next**
 - Run the prompt in Claude Design, store the link and exports in `docs/design/`.
 - Team reviews PR #1.
+
+## 2026-10-06 – Marcus – AI session
+
+**What changed**
+- Design round one from Claude Design added 1:1 under `docs/design/round-one/` (HTML export) with PNG renders in `exports/`.
+- `docs/design/round-one-decisions.md`: the 20 decisions the design made, as proposals with the team question on each, plus the differences to the app sketch (onboarding and state screens added, queue board lives inside Today).
+- App sketch, docs index, README and the sketch page link to the design. Three new Phase 0 to-dos, one new idea.
+
+**Open points / next**
+- Team confirms or overturns the design decisions (to-do in Phase 0).
+- Next design round only via a new Claude Design run from `claude-design-prompt.md`; never edit the export by hand.

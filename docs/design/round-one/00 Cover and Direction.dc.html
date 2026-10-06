@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="pn.css">
+<style>body{margin:0;background:#0b0b0c}</style>
+</helmet>
+<div data-theme="dark" style="width:1600px;background:var(--color-bg);color:var(--color-text)">
+  <section data-screen-label="Cover" style="padding:64px;border-bottom:1px solid var(--color-divider);display:grid;grid-template-columns:1fr 1fr;gap:64px">
+    <div>
+      <div style="font-size:14px;font-weight:600;color:var(--pn-accent-text)">00 · Cover and direction</div>
+      <h1 style="font-size:140px;line-height:.9;letter-spacing:-.05em;margin:24px 0 0">project-next</h1>
+      <p style="font-size:24px;line-height:1.3;max-width:640px;margin:32px 0 0;font-weight:500">Booking and walk-in queue for barbers and hairdressers. First UI round: design system, Client app, Provider dashboard, flows.</p>
+      <p style="font-size:16px;color:var(--pn-muted);margin:16px 0 0">Working title and placeholder wordmark. All data is example data.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:flex-end">
+      <sc-for list="{{ pages }}" as="p" hint-placeholder-count="6">
+        <a href="{{ p.href }}" style="display:grid;grid-template-columns:64px 1fr auto;align-items:baseline;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider);color:var(--color-text);text-decoration:none">
+          <span style="font-size:24px;font-weight:600;color:var(--pn-accent-text)">{{ p.n }}</span><span style="font-size:26px;font-weight:700;letter-spacing:-.02em">{{ p.t }}</span><span style="font-size:15px;color:var(--pn-muted)">{{ p.s }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+  <section style="padding:56px 64px;display:grid;grid-template-columns:420px 1fr;gap:64px;border-bottom:1px solid var(--color-divider)">
+    <div>
+      <h2 style="font-size:40px;letter-spacing:-.03em;margin:0 0 12px">Direction: neutral first</h2>
+      <p style="font-size:17px;color:var(--pn-muted);margin:0">No brand yet, so the UI stays quiet: black, white and greys, one family (Geist), soft 12 px corners, 1 px lines. Two colours have a job. Brand colour and naming come later and can sit on top without a rebuild.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="height:120px;border-radius:16px;background:#0b0b0c;border:1px solid var(--color-strong)"></span><span style="font-weight:600">Black</span><span style="font-size:14px;color:var(--pn-muted)">Ground in dark mode, ink in light mode.</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="height:120px;border-radius:16px;background:#ffffff"></span><span style="font-weight:600">White</span><span style="font-size:14px;color:var(--pn-muted)">Ink in dark mode, ground in light mode. Selected chips.</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="height:120px;border-radius:16px;background:#2f6bff"></span><span style="font-weight:600">Blue</span><span style="font-size:14px;color:var(--pn-muted)">Primary action, links, selection, live queue.</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="height:120px;border-radius:16px;background:#e0262b"></span><span style="font-weight:600">Red</span><span style="font-size:14px;color:var(--pn-muted)">Decline, cancel, delete, no-show. And "You're next".</span></div>
+    </div>
+  </section>
+  <section style="padding:40px 64px 56px;display:grid;grid-template-columns:420px 1fr;gap:64px">
+    <h2 style="font-size:28px;letter-spacing:-.02em;margin:0">Parked for later</h2>
+    <p style="font-size:17px;color:var(--pn-muted);margin:0;max-width:760px">Name and wordmark, brand colour, illustration or photo style. "project-next" stays as a placeholder until the team picks a naming direction.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){ return {
+    pages:[['01','Design system','colour roles, type, parts','01 Design System.dc.html'],['02','Client app','32 frames + prototype, iPhone','02 Client App.dc.html'],['03','Provider dashboard','12 frames, desktop + tablet','03 Provider Dashboard.dc.html'],['04','Flows','client and provider','04 Flows.dc.html'],['05','Open questions','decisions to confirm','05 Open Questions.dc.html']].map(([n,t,s,href])=>({n,t,s,href}))
+  }; }
+}
+</script>
+</body>
+</html>

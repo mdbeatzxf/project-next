@@ -133,10 +133,13 @@ The estimated wait is simple at first: people ahead multiplied by the average se
 
 ## 3. Screens
 
+The UI for these screens is designed in [design/round-one/](design/round-one/) (Claude Design export, PNG renders in `exports/`). Frame names there match the screen names here. Decisions the design made on its own are listed in [design/round-one-decisions.md](design/round-one-decisions.md).
+
 ### 3.1 Client app
 
 | Screen | Purpose | Key elements | MVP |
 |---|---|---|---|
+| Onboarding | First start | Four short screens (what it does, choose city, about your hair, allow notifications) plus login via email link, Apple or Google. No phone number | Yes |
 | Home / Search | Find a provider | City or address input, specialty chips, "comes to you" toggle, open now | Yes |
 | Results list & map | Compare providers nearby | Cards with photo, rating, price from, distance, "queue: 3 waiting"; map with pins | Yes (list), map simple |
 | Provider profile | Decide and act | Portfolio photos, services with prices, hours, location or radius, reviews, verified badge, two buttons: Book, Join queue | Yes |
@@ -145,6 +148,7 @@ The estimated wait is simple at first: people ahead multiplied by the average se
 | My bookings | Manage visits | Upcoming and past, cancel or reschedule, favourites, rebook | Yes (basic) |
 | Review | Rate a done booking | Stars 1 to 5, text, optional photos | Yes |
 | Profile / settings | Account and privacy | Display name, home city, notification settings, delete account | Yes (basic) |
+| Empty, loading, error states | Keep the app honest | Search loading and empty, queue error, no bookings yet | Yes |
 
 ### 3.2 Provider dashboard
 
@@ -153,7 +157,7 @@ The estimated wait is simple at first: people ahead multiplied by the average se
 | Onboarding wizard | Get a provider live fast | Type (shop, independent, mobile), address or radius, specialties, services and prices, hours, photos, stylists, verification upload | Yes |
 | Today | The one screen for a working day | Today's calendar per stylist on the left, live queue on the right, big Next and Done buttons | Yes |
 | Calendar | Plan the week | Week view per stylist, block times, drag to move, booking requests to accept or decline | Yes (basic) |
-| Queue board | Run the walk-in queue | Ordered list, next, skip, done, add walk-in by name, live wait estimate | Yes |
+| Queue board | Run the walk-in queue | Ordered list, next, skip, done, add walk-in by name, live wait estimate. In the design this is the right half of Today, not a separate screen | Yes (inside Today) |
 | Services & prices | Keep the menu current | Name, category, duration, price, at client's home flag | Yes |
 | Portfolio | Show evidence of work | Upload photos, tag by style, tag stylist, reorder | Yes |
 | Stylists / team | Manage staff | Add or deactivate stylists, specialties, working hours | Yes (basic) |
@@ -404,4 +408,5 @@ Taken from the kickoff; not decided yet.
 - New ideas go to [ideas.md](ideas.md), not here.
 - Concrete tasks go to [todo.md](todo.md) with an owner.
 - The interactive HTML version of this sketch lives in [index.html](index.html). When you change a flow, screen or entity here, update it there too in the same PR, so both stay in sync.
+- UI design lives in [design/](design/README.md). A change to a screen here means a new Claude Design run via `design/claude-design-prompt.md`, not a hand edit of the export.
 - Diagrams are Mermaid; GitHub renders them. Quote labels that contain punctuation.
