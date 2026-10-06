@@ -17,6 +17,7 @@ Three people, three PCs, and each of us also runs AI coding sessions on this rep
 | To-dos | `docs/todo.md` |
 | Work log | `docs/log.md` |
 | App sketch (roles, flows, screens, data model) | `docs/app-sketch.md`, interactive version in `docs/index.html` |
+| UI design (prompt, links, exports) | `docs/design/` |
 | Code (later) | `apps/` (deployable apps), `packages/` (shared code) |
 | Index of all docs | `docs/README.md` |
 

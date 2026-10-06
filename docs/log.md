@@ -28,3 +28,14 @@ Copy the template, fill it in, append it at the bottom. Keep it short: what chan
 **Open points / next**
 - Team reviews all docs and comments via PR.
 - Next meeting: confirm the date; decide name, tech stack, fresh build vs reuse.
+
+## 2026-10-06 – Marcus – AI session
+
+**What changed**
+- Team member name corrected to Naayi.
+- Added `docs/design/` with the Claude Design prompt and the rules for storing design links and exports.
+- Pull request #1 opened for the whole scaffolding.
+
+**Open points / next**
+- Run the prompt in Claude Design, store the link and exports in `docs/design/`.
+- Team reviews PR #1.

@@ -28,6 +28,8 @@ Purpose: index of everything in `docs/`, with the reading order for newcomers.
 | `decisions/README.md` | How ADRs (architecture decision records) work. |
 | `decisions/0000-template.md` | ADR template. |
 | `decisions/0001-tech-stack.md` | Tech stack proposal. Status: proposed. |
+| `design/README.md` | Where UI designs live, how they link back to the sketch. |
+| `design/claude-design-prompt.md` | The prompt we use in Claude Design to produce the UI. |
 
 ## Related files outside `docs/`
 
