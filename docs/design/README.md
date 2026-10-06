@@ -14,4 +14,4 @@ Purpose: where UI design work lives and how it links back to the docs.
 
 | Date | What | Tool | Link | Exports |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-06 | First UI design round (Client app + Provider dashboard), from `claude-design-prompt.md` | Claude Design | https://claude.ai/design/p/8793adfc-8910-4925-87a8-7667aed3dc07?via=share | not yet exported |
