@@ -76,7 +76,7 @@ All three have other commitments and limited time. Alex already has a general se
 ## Open questions
 
 - Name and brand; legal form; who owns what.
-- Time budget per person. Marcus said he cannot pull this off alone.
+- Time budget per person. Marcus said this cannot be pulled off alone.
 - Build fresh, or reuse Alex's Service Scout code?
 - First cities; first 5–10 pilot providers; survey questions for barbers.
 - Pricing model, and when to switch from free to paid.
